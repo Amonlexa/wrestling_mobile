@@ -90,7 +90,6 @@ class ProfileEditScreen extends StatelessWidget {
                          padding: const EdgeInsets.all(12.0),
                          child: AppButton(
                              title: 'Выбрать фото',
-                             isFilled: true,
                              onPressed: () {
                                ModalBottomImagePicker(
                                    onPressCamera: () {
@@ -156,7 +155,6 @@ class ProfileEditScreen extends StatelessWidget {
                          padding: const EdgeInsets.symmetric(vertical: 6.0),
                          child: AppButton(
                              title: 'Сохранить',
-                             isFilled: true,
                              onPressed: () {
                                if(firstNameController.text.isEmpty || lastNameController.text.isEmpty || patronymicController.text.isEmpty) {
                                  Fluttertoast.showToast(msg: 'Пожалуйста заполните все поля');

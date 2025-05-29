@@ -1,56 +1,74 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wrestling_hub/core/constants/app_colors.dart';
+import 'package:wrestling_hub/core/constants/app_text_styles.dart';
+import 'package:wrestling_hub/src/presentation/shared/cubits/button_cubit.dart';
+import 'package:wrestling_hub/src/presentation/shared/cubits/button_state.dart';
+import 'package:wrestling_hub/src/presentation/shared/widgets/wrestling_progress_bar.dart';
 
 class AppButton extends StatelessWidget {
 
   final String title;
   final VoidCallback onPressed;
-  final bool loading;
-  final bool active;
-  final bool isFilled;
-  final Color textColor;
+  final double? height;
+  final double? width;
 
   const AppButton({
     super.key,
     required this.title,
     required this.onPressed,
-    this.loading = false,
-    this.active = true,
-    this.isFilled = false,
-    this.textColor = Colors.white
+    this.height,
+    this.width,
   });
 
 
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-        width: double.infinity,
-        height: 45,
-        child: OutlinedButton(
-          style: OutlinedButton.styleFrom(
-              side: const BorderSide(width: 0.0, color: Colors.transparent),
-              elevation: 0.0,
-              splashFactory: InkRipple.splashFactory,
-              foregroundColor: AppColors.white,
-              shadowColor: AppColors.accent,
-              backgroundColor: isFilled ? AppColors.accent : const Color(0xff969696),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              )),
-          onPressed: () {
-            if (active) {
-              return onPressed();
-            }
-          },
-          child: loading ? Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              const SizedBox(height: 20, width: 20, child: CircularProgressIndicator(strokeWidth: 2.0, valueColor:AlwaysStoppedAnimation<Color>(Colors.white),)),
-              const SizedBox(width: 8),
-              Text("Загрузка...", style: TextStyle(color: isFilled ? Colors.white : AppColors.white)),
-            ],
-          ) : Text(title,style: const TextStyle(color: AppColors.white,fontSize: 15,fontWeight: FontWeight.normal)),
-        ));
+    return BlocBuilder<ButtonCubit,ButtonState>(
+      bloc: context.read<ButtonCubit>(),
+      builder: (context, state) {
+        if (state is ButtonLoadingState){
+          return _loading(context);
+        }
+        return _initial(context);
+      },
+    );
   }
+
+
+  Widget _loading(BuildContext context) {
+    return ElevatedButton(
+        onPressed: null,
+        style: ElevatedButton.styleFrom(
+          disabledBackgroundColor: Colors.grey,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          minimumSize: Size(
+              width ?? MediaQuery.of(context).size.width,
+              height ?? 45
+          ),
+        ),
+        child: const WrestlingProgressBar()
+    );
+  }
+
+
+  Widget _initial(BuildContext context) {
+    return ElevatedButton(
+        onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: AppColors.accent,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          minimumSize: Size(
+              width ?? MediaQuery.of(context).size.width,
+              height ?? 45
+          ),
+        ),
+        child: Text(title, style: AppTextStyles.buttonDarkStyle)
+    );
+  }
+
+
+
+
 }

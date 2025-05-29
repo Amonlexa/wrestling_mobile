@@ -49,7 +49,6 @@ class VideoInfoScreen extends StatelessWidget {
                 ),
                 AppButton(
                     title:'Написать в поддержку',
-                    isFilled: true,
                     onPressed: () async {
                       ModalBottomFeedback().show(context);
                     }

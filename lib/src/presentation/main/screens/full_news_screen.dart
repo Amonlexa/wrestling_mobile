@@ -149,7 +149,6 @@ class _FullNewsScreen extends State<FullNewsScreen>  {
                  const SizedBox(height: 15),
                  state.full!.link!.isNotEmpty ? AppButton(
                      title: 'Открыть источник',
-                     isFilled: true,
                      onPressed: () {
                        launchUrl(Uri.parse(state.full!.link!));
                      }) : const SizedBox(),

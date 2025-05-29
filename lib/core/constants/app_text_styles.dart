@@ -54,10 +54,16 @@ class AppTextStyles {
     decoration: TextDecoration.underline,
   );
 
-  static  TextStyle buttonStyle = GoogleFonts.openSans(
+  static TextStyle buttonLightStyle = GoogleFonts.openSans(
     fontSize: 15,
     color: AppColors.black,
-    fontWeight: FontWeight.bold
+    fontWeight: FontWeight.normal
+  );
+
+  static TextStyle buttonDarkStyle = GoogleFonts.openSans(
+      fontSize: 15,
+      color: AppColors.white,
+      fontWeight: FontWeight.normal
   );
 
   static TextStyle hintStyle =  GoogleFonts.openSans(

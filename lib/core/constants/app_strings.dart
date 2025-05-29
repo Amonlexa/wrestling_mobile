@@ -12,7 +12,7 @@ class AppStrings {
   static const String authHintNumber = '+ (9999) 111-11-11';
   static const String authContinueWithAcc = 'Продолжить с аккаунтом';
   static const String authContinueWithApple = 'Войти по Apple id';
-  static const String authContinueWithGoogle = 'Войти по Google';
+  static const String authContinueWithGoogle = 'Продолжить с Google';
   static const String authEnterCorrect = 'Пожалуйста введите корректный номер';
   static const String authPrivacyStart = 'Нажимая кнопку “Далее”, я подтверждаю, что ознакомлен(а) с условием ';
   static const String authPrivacyCenter = 'Политики конфиденциальности';

@@ -87,7 +87,6 @@ class _ProfileScreen extends State<ProfileScreen> {
                       ],
                       AppButton(
                         title: state is ProfileLoggedState ? 'Редактировать профиль' : 'Войти в профиль',
-                        isFilled: true,
                         onPressed: () {
                           if (state is ProfileLoggedState) {
                             GoRouter.of(context).pushNamed(AppRoute.profileEdit).then((val) {

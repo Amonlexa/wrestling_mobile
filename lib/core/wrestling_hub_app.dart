@@ -12,6 +12,7 @@ import 'package:wrestling_hub/src/presentation/main/blocs/news_details/details_n
 import 'package:wrestling_hub/src/presentation/main/blocs/news_search/search_news_bloc.dart';
 import 'package:wrestling_hub/src/presentation/profile/blocs/edit/edit_bloc.dart';
 import 'package:wrestling_hub/src/presentation/profile/blocs/profile/profile_bloc.dart';
+import 'package:wrestling_hub/src/presentation/shared/cubits/button_cubit.dart';
 import 'package:wrestling_hub/src/presentation/video/cubits/video_cubit/video_favorite_cubit.dart';
 import 'package:wrestling_hub/src/presentation/video/cubits/videos/videos_cubit.dart';
 import 'di.dart';
@@ -39,6 +40,7 @@ class _WrestlingSakhaApp extends State<WrestlingSakhaApp>{
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider<ButtonCubit>(create: (context) => sl()),
         BlocProvider<MainBloc>(create: (context) => sl()),
         BlocProvider<DetailsNewsBloc>(create: (context) => sl()),
         BlocProvider<SearchNewsBloc>(create: (context) => sl()),

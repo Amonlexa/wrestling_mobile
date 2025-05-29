@@ -76,7 +76,6 @@ class ConfirmSmsCode extends StatelessWidget {
                     const SizedBox(height: 24),
                     AppButton(
                         title: 'Потвердить',
-                        isFilled:  true,
                         onPressed: () {
                           if(_controllerSms.text.length < 3) {
                             Fluttertoast.showToast(msg: 'Введите код');

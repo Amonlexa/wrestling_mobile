@@ -56,6 +56,7 @@ import 'package:wrestling_hub/src/presentation/main/blocs/news_details/details_n
 import 'package:wrestling_hub/src/presentation/main/blocs/news_search/search_news_bloc.dart';
 import 'package:wrestling_hub/src/presentation/profile/blocs/edit/edit_bloc.dart';
 import 'package:wrestling_hub/src/presentation/profile/blocs/profile/profile_bloc.dart';
+import 'package:wrestling_hub/src/presentation/shared/cubits/button_cubit.dart';
 import 'package:wrestling_hub/src/presentation/video/cubits/video_cubit/video_favorite_cubit.dart';
 import 'package:wrestling_hub/src/presentation/video/cubits/videos/videos_cubit.dart';
 
@@ -82,7 +83,8 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<GoogleSignIn>(GoogleSignIn(
       clientId: AppConfig.googleOauthClientID,
       serverClientId: AppConfig.googleOauthServerClientID,
-      scopes: ['openid', 'email', 'https://www.googleapis.com/auth/userinfo.profile']));
+      scopes: ['openid', 'email', 'https://www.googleapis.com/auth/userinfo.profile']
+  ));
 
 
   // Data sources
@@ -125,6 +127,7 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<FirebaseService>(FirebaseService(sl(),userData));
 
   // Blocs
+  sl.registerFactory<ButtonCubit>(() => ButtonCubit());
   sl.registerFactory<MainBloc>(() => MainBloc(sl(), sl(),sl()));
   sl.registerFactory<DetailsNewsBloc>(() => DetailsNewsBloc(sl(), sl(),sl(),sl(),sl()));
   sl.registerFactory<SearchNewsBloc>(() => SearchNewsBloc(sl(), sl()));

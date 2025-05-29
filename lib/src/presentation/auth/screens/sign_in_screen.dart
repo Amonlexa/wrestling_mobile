@@ -71,7 +71,6 @@ class _SignInScreen extends State<SignInScreen>{
                     ),
                     AppButton(
                       title: AppStrings.next,
-                      isFilled: context.read<SignInCubit>().isCorrectNumber,
                       onPressed: () {
                         if (numberController.text.length > 15) {
                           GoRouter.of(context).pushReplacementNamed(

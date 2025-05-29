@@ -34,7 +34,6 @@ class ErrorPage extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 15.0,vertical: 10),
             child: AppButton(
                 title: AppStrings.repeat,
-                isFilled: true,
                 onPressed: () {
                   return onPress!();
                 }

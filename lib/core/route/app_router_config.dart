@@ -3,7 +3,6 @@ import 'package:wrestling_hub/src/data/video/models/video.dart';
 import 'package:wrestling_hub/src/presentation/auth/screens/confirm_code_screen.dart';
 import 'package:wrestling_hub/src/presentation/auth/screens/sign_in_screen.dart';
 import 'package:wrestling_hub/src/presentation/auth/screens/onboarding_screen.dart';
-import 'package:wrestling_hub/src/presentation/auth/screens/privacy_policy_screen.dart';
 import 'package:wrestling_hub/src/presentation/auth/screens/splash_screen.dart';
 import 'package:wrestling_hub/src/presentation/favorites/screens/favorites_screen.dart';
 import 'package:wrestling_hub/src/presentation/main/screens/full_news_screen.dart';
@@ -139,13 +138,13 @@ class AppRouterConfig {
               return const VideoInfoScreen();
             }
         ),
-        GoRoute(
-            path: AppRoute.privacy,
-            name: AppRoute.privacy,
-            builder: (context, state)  {
-              return const PrivacyPolicyScreen();
-            }
-        ),
+        // GoRoute(
+        //     path: AppRoute.privacy,
+        //     name: AppRoute.privacy,
+        //     builder: (context, state)  {
+        //       return const PrivacyPolicyScreen();
+        //     }
+        // ),
       ],
       initialLocation: AppRoute.root,
   );
