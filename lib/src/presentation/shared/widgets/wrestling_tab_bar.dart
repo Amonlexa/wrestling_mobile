@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:wrestling_hub/core/constants/app_colors.dart';
-import 'package:wrestling_hub/core/constants/app_config.dart';
 class WrestlingTabBar extends StatelessWidget {
 
   final TabController? controller;
   final List<Widget> tabs;
+  final ValueChanged<int>? onTap;
 
-  const WrestlingTabBar({super.key,required this.controller, required this.tabs});
+  const WrestlingTabBar({super.key,required this.controller, required this.tabs,  this.onTap});
 
 
 
@@ -21,12 +21,15 @@ class WrestlingTabBar extends StatelessWidget {
         isScrollable: true,
         padding: EdgeInsets.zero,
         dividerColor: Colors.transparent,
-        indicatorColor: AppColors.colorRed,
+        indicatorColor: AppColors.accent,
         indicator: const UnderlineTabIndicator(
-          borderSide: BorderSide(color: AppColors.colorRed, width: 3.0),
+          borderSide: BorderSide(color: AppColors.accent, width: 3.0),
           borderRadius: BorderRadius.all(Radius.circular(10.0)),
           insets: EdgeInsets.only(bottom: 6),
         ),
+        onTap: (val) {
+          return onTap!(val);
+        },
         tabs: tabs
     );
   }

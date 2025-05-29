@@ -4,22 +4,22 @@ import 'package:dio/dio.dart' hide Headers;
 import 'package:retrofit/retrofit.dart';
 import 'package:wrestling_hub/core/constants/app_urls.dart';
 import 'package:wrestling_hub/src/data/user/models/user.dart';
-abstract class UserRemoteDataSource {
+abstract class UserApiDataSource {
 
-  factory UserRemoteDataSource(Dio dio) = _UserRemoteDataSource;
+  factory UserApiDataSource(Dio dio) = _UserApiDataSource;
   Future<HttpResponse<String>> sendImageToServer(File image);
   Future<HttpResponse<User>> editProfileUser(Map<String,dynamic> data);
   Future<HttpResponse<bool>> deleteProfileUser(String token);
   Future<HttpResponse<User>> confirmSmsCode(Map<String,dynamic> data);
   Future<HttpResponse<User>> getUser(String token);
-  Future<HttpResponse<User>> signInGoogle();
+  Future<HttpResponse<User>>  signInGoogle(String token);
 }
 
-class _UserRemoteDataSource implements UserRemoteDataSource {
+class _UserApiDataSource implements UserApiDataSource {
 
   final Dio client;
 
-  _UserRemoteDataSource(this.client);
+  _UserApiDataSource(this.client);
 
   @override
   Future<HttpResponse<String>> sendImageToServer(File image) async {
@@ -37,7 +37,6 @@ class _UserRemoteDataSource implements UserRemoteDataSource {
         )
     );
     final parsed = jsonDecode(request.data);
-    print(parsed);
     String value = '';
     if(parsed['success']) {
       value = parsed['image'];
@@ -132,27 +131,32 @@ class _UserRemoteDataSource implements UserRemoteDataSource {
   }
 
   @override
-  Future<HttpResponse<User>> signInGoogle() async {
+  Future<HttpResponse<User>> signInGoogle(String token) async {
+    print('send google token');
     final request = await client.get(
-        AppUrls.getUser,
+        AppUrls.signInGoogle,
         data: json.encode(
             {
               "token" : token,
             }
         ));
     final User value;
+
+    print(request.data);
+
     final parsed = jsonDecode(request.data) ?? [];
+
+    print('google user $parsed');
+
     try{
-      if(parsed['user'] != null) {
-        value = User.fromJson(parsed['user']);
-      }else{
-        value = User();
-      }
+      value = User.fromJson(parsed['user']);
     }catch(e) {
       rethrow;
     }
     return HttpResponse(value, request);
   }
+
+
 
 
 }

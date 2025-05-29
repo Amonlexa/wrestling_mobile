@@ -1,6 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wrestling_hub/core/constants/app_colors.dart';
-import 'package:wrestling_hub/core/utils/navbar_item.dart';
 import 'package:flutter/material.dart';
 
 class HomeBottomNavigation extends StatefulWidget  {
@@ -13,11 +13,21 @@ class HomeBottomNavigation extends StatefulWidget  {
 
 }
 
-class _HomeBottomNavigation extends State<HomeBottomNavigation> {
+class _HomeBottomNavigation extends State<HomeBottomNavigation> with TickerProviderStateMixin {
+
+  TabController? _controllerTab;
+
+
+  @override
+  void initState() {
+    _controllerTab = TabController(length: 4, vsync: this);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+      top: false,
       child: Scaffold(
         body: widget.navigationShell,
         bottomNavigationBar: _navBar(context),
@@ -25,56 +35,39 @@ class _HomeBottomNavigation extends State<HomeBottomNavigation> {
     );
   }
 
-
-
   Widget _navBar(BuildContext context) {
-    return NavigationBarTheme(data: NavigationBarThemeData(
-        backgroundColor: AppColors.colorBottomNav,
-        indicatorColor: AppColors.colorRed,
-        labelTextStyle: WidgetStateProperty.resolveWith((states) {
-          if (states.contains(WidgetState.selected)) {
-            return const TextStyle(
-              fontSize: 13.0,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-              fontFamily: 'Crimson',
-              letterSpacing: 1.0,
-            );
-          }
-          return const TextStyle(
-            fontSize: 11.0,
-            fontWeight: FontWeight.w500,
-            color: Colors.white,
-            fontFamily: 'Crimson',
-            letterSpacing: 1.0,
-          );
-        })),
-      child: NavigationBar(
-        height: 60,
-        labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
-        selectedIndex: widget.navigationShell.currentIndex,
-        onDestinationSelected: (index)  {
-          widget.navigationShell.goBranch(index);
-        },
-        destinations: [
-          NavigationDestination(
-              icon: Icon(NavbarItem.home.icon, color: Colors.white,size: 18),
-              label: NavbarItem.home.name
-          ),
-          NavigationDestination(
-              icon: Icon(NavbarItem.video.icon, color: Colors.white,size: 18),
-              label: NavbarItem.video.name
-          ),
-          NavigationDestination(
-              icon: Icon(NavbarItem.favorites.icon, color: Colors.white,size: 18),
-              label: NavbarItem.favorites.name
-          ),
-          NavigationDestination(
-            icon: Icon(NavbarItem.profile.icon, color: Colors.white,size: 18),
-            label: NavbarItem.profile.name,
-          ),
-        ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 8),
+      child: ClipRRect(
+          borderRadius: const BorderRadius.all(Radius.circular(20.0)),
+          child: Container(
+            color: AppColors.bottomNav,
+            child: TabBar(
+              controller: _controllerTab,
+              padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 4),
+              unselectedLabelColor: Colors.white,
+              labelColor: AppColors.white,
+              dividerColor: Colors.transparent,
+              indicatorColor: AppColors.accent,
+              indicatorSize: TabBarIndicatorSize.label,
+              indicator:const UnderlineTabIndicator(
+                borderSide:BorderSide(color: AppColors.accent, width: 4.0),
+                borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                insets: EdgeInsets.symmetric(horizontal: 25.0, vertical: 5),
+              ),
+              onTap: (val) {
+                widget.navigationShell.goBranch(val);
+              },
+              tabs: const <Tab> [
+                Tab(icon: Icon(CupertinoIcons.home)),
+                Tab(icon: Icon(CupertinoIcons.play_circle_fill)),
+                Tab(icon: Icon(CupertinoIcons.square_arrow_down)),
+                Tab(icon: Icon(CupertinoIcons.profile_circled)),
+              ],
+            ),
+          )
       ),
     );
   }
+
 }

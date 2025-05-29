@@ -114,7 +114,7 @@ class _NewsCommentsScreen extends State<NewsCommentsScreen> {
          ),
         bottomSheet: Container(
           height: 55,
-          color: AppColors.colorBottomNav,
+          color: AppColors.bottomNav,
           alignment: Alignment.center,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -135,7 +135,7 @@ class _NewsCommentsScreen extends State<NewsCommentsScreen> {
               ),
               const SizedBox(width: 5),
               IconButton(
-                icon: const Icon(Icons.send, color: AppColors.colorRed),
+                icon: const Icon(Icons.send, color: AppColors.accent),
                 onPressed: () {
                   context.read<NewsCommentBloc>().add(NewsCommentSendEvent(commentFormController.text,widget.idNews,context));
                   },

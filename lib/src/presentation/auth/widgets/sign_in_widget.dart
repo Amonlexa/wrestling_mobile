@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:wrestling_hub/core/constants/app_text_styles.dart';
 
-class GoogleSignOutWidget extends StatelessWidget {
+class SignInWidget extends StatelessWidget {
 
   final String title;
   final String iconPath;
   final VoidCallback onPressed;
-  const GoogleSignOutWidget({super.key, required this.iconPath, required this.onPressed, required this.title});
+  const SignInWidget({super.key, required this.iconPath, required this.onPressed, required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class GoogleSignOutWidget extends StatelessWidget {
        return onPressed ();
      },
      icon: Image.asset(iconPath, height: 20),
-     label: Text(title,style: const TextStyle(fontFamily: 'Crimson',fontSize: 13,fontWeight: FontWeight.bold)),
+     label: Text(title,style: AppTextStyles.buttonStyle),
    );
   }
 

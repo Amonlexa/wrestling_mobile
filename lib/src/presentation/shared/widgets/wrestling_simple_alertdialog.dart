@@ -39,7 +39,7 @@ class WrestlingSimpleAlertDialog extends StatelessWidget {
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
       alignment: Alignment.center,
-      backgroundColor: AppColors.colorBackground,
+      backgroundColor: AppColors.background,
       title: Container(alignment:Alignment.center,child: Text(title,style: Theme.of(context).textTheme.titleLarge)),
       content: Text(description,style: Theme.of(context).textTheme.titleMedium),
       actions: [

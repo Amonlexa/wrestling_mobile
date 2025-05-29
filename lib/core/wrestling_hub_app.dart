@@ -1,7 +1,7 @@
 import 'package:wrestling_hub/core/route/app_router_config.dart';
 import 'package:wrestling_hub/core/theme.dart';
 import 'package:wrestling_hub/src/presentation/auth/blocs/auth/auth_bloc.dart';
-import 'package:wrestling_hub/src/presentation/auth/blocs/number_phone/number_phone_bloc.dart';
+import 'package:wrestling_hub/src/presentation/auth/blocs/sign_in/sign_in_cubit.dart';
 import 'package:wrestling_hub/src/presentation/auth/blocs/splash/splash_bloc.dart';
 import 'package:wrestling_hub/src/presentation/favorites/blocs/favorite_bloc.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +44,7 @@ class _WrestlingSakhaApp extends State<WrestlingSakhaApp>{
         BlocProvider<SearchNewsBloc>(create: (context) => sl()),
         BlocProvider<NewsCommentBloc>(create: (context) => sl()),
         BlocProvider<AuthBloc>(create: (context) => sl()),
-        BlocProvider<NumberPhoneBloc>(create: (context) => sl()),
+        BlocProvider<SignInCubit>(create: (context) => sl()),
         BlocProvider<ProfileBloc>(create: (context) => sl()),
         BlocProvider<EditBloc>(create: (context) => sl()),
         BlocProvider<SplashBloc>(create: (context) => sl()),

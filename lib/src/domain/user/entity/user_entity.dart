@@ -3,6 +3,7 @@ class UserEntity {
   String? id;
   String? status;
   String? token;
+  String? googleId;
   String? phoneNumber;
   String? firstName;
   String? lastName;
@@ -16,6 +17,7 @@ class UserEntity {
     this.id,
     this.status,
     this.token,
+    this.googleId,
     this.phoneNumber,
     this.firstName,
     this.lastName,

@@ -1,17 +1,46 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wrestling_hub/core/resources/data_state.dart';
+import 'package:wrestling_hub/src/domain/user/usecases/get_token_google_use_case.dart';
+import 'package:wrestling_hub/src/domain/user/usecases/sign_out_google_usecase.dart';
+import 'package:wrestling_hub/src/presentation/auth/blocs/sign_in/sign_in_state.dart';
 
-class AuthSelectBloc extends Cubit<NumberPhoneEvent, bool> {
+class SignInCubit extends Cubit<SignInState> {
+  final GetTokenGoogleUseCase _getTokenGoogleUseCase;
+  final SignOutGoogleUseCase _signOutGoogleUseCase;
 
-  AuthSelectBloc() : super(false);
 
-  
-  onChangeNumberPhone(String phone, Emitter<bool> emit) async {
-    if(event.number.length > 15) {
-      emit(true);
+  SignInCubit(this._getTokenGoogleUseCase, this._signOutGoogleUseCase) : super(SignInInitState());
+
+  bool isCorrectNumber = false;
+
+
+  onChangeNumberPhone(String phone) async {
+    if(phone.length > 15) {
+      isCorrectNumber = true;
     }else{
-      emit(false);
+      isCorrectNumber = false;
     }
   }
+
+  onSignInGoogle() async {
+    emit(SignInLoadingState());
+
+    final dataStateToken = await _getTokenGoogleUseCase();
+    if(dataStateToken is DataFailed) {
+      print('0000');
+      return emit(SignInFailureState(message: "Ошибка получения токена"));
+    }
+
+    print('Google token ${dataStateToken.data}');
+    final dataStateSignOut = await _signOutGoogleUseCase(params: dataStateToken.data.toString());
+    if(dataStateSignOut is DataFailed) {
+      emit(SignInFailureState(message: "Ошибка регистрации токена"));
+    }
+    if(dataStateSignOut is DataSuccess) {
+      emit(SignInSuccessState());
+    }
+  }
+
 
 }
 

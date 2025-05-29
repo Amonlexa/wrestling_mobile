@@ -8,3 +8,5 @@ class AuthConfirmEvent extends AuthEvent {
   final String code;
   AuthConfirmEvent(this.number, this.code);
 }
+
+class AuthGoogleEvent extends AuthEvent {}

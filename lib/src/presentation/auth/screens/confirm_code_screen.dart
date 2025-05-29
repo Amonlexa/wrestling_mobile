@@ -26,7 +26,7 @@ class ConfirmSmsCode extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.colorBackground,
+      backgroundColor: AppColors.background,
       body: BlocListener<AuthBloc, AuthState> (
         bloc: context.read(),
          listener: (BuildContext context, AuthState state) {
@@ -66,7 +66,7 @@ class ConfirmSmsCode extends StatelessWidget {
                           textStyle: Theme.of(context).textTheme.labelLarge,
                           decoration: BoxDecoration(
                               shape: BoxShape.rectangle,
-                              color: AppColors.colorBottomNav,
+                              color: AppColors.bottomNav,
                               borderRadius: BorderRadius.circular(15),
                               border: state is AuthWrongCodeState ? Border.all(color: Colors.red, width: 1.0) : Border.all(color: const Color(0x24000000), width: 1.5)
                           )
@@ -74,10 +74,8 @@ class ConfirmSmsCode extends StatelessWidget {
                       length: 4,
                     ),
                     const SizedBox(height: 24),
-                    WrestlingButton(
-                        height: 40,
-                        titleWidget: const Text('Потвердить', style: TextStyle(color: Colors.white, fontSize: 14, fontFamily: 'Crimson')),
-                        primaryColor: AppColors.colorRed,
+                    AppButton(
+                        title: 'Потвердить',
                         isFilled:  true,
                         onPressed: () {
                           if(_controllerSms.text.length < 3) {
@@ -104,16 +102,16 @@ class ConfirmSmsCode extends StatelessWidget {
                     const SizedBox(height: 24),
                     InkWell(
                       onTap: () {
-                        const ModalBottomFeedback().show(context);
+                         ModalBottomFeedback().show(context);
                       },
-                      child: const Text("Нужна помощь?",style: TextStyle(fontFamily:'Crimson',fontWeight: FontWeight.normal,fontSize: 14,color: AppColors.colorSmallText)),
+                      child: const Text("Нужна помощь?",style: TextStyle(fontFamily:'Crimson',fontWeight: FontWeight.normal,fontSize: 14,color: AppColors.smallText)),
                     ),
                     const SizedBox(height: 12),
                     InkWell(
                       onTap: () {
                         context.goNamed(AppRoute.main);
                       },
-                      child: const Text("Нету телеграма? пропустить",style: TextStyle(fontFamily:'Crimson',fontWeight: FontWeight.normal,fontSize: 14,color: AppColors.colorSmallText)),
+                      child: const Text("Нету телеграма? пропустить",style: TextStyle(fontFamily:'Crimson',fontWeight: FontWeight.normal,fontSize: 14,color: AppColors.smallText)),
                     )
                   ],
                 ),

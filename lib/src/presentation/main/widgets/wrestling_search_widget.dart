@@ -55,7 +55,7 @@ class WrestlingSearchWidget extends StatelessWidget{
             }else{
               return onPressSearch(controller!.text);
             }
-          }, icon: const Icon(Icons.search,color: AppColors.colorRed,size: 20)
+          }, icon: const Icon(Icons.search,color: AppColors.accent,size: 20)
           )
         ],
       ),

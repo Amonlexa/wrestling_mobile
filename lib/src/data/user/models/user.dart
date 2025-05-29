@@ -7,6 +7,7 @@ class User extends UserEntity {
     super.id,
     super.status,
     super.token,
+    super.googleId,
     super.phoneNumber,
     super.firstName,
     super.lastName,
@@ -21,6 +22,7 @@ class User extends UserEntity {
     id = data['id'] ?? '';
     status = data['status'] ?? '';
     token = data['token'] ?? '';
+    googleId = data['google_id'] ?? '';
     phoneNumber = data['phone_number'] ?? '';
     firstName = data['first_name'] ?? '';
     lastName = data['last_name'] ?? '';

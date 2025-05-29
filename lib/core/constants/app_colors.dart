@@ -2,10 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const Color colorAccent = Color(0xffFF724C);
-  static const Color colorRed = Color(0xfffd0e13);
-  static const Color colorBottomNav = Color(0xff382929);
-  static const Color colorSmallText = Color(0xffB89E9E);
-  static const Color colorWhite = Colors.white;
-  static const Color colorBackground = Color(0xff171212);
+  static const Color accent = Color(0xfff17456);
+  static const Color bottomNav = Color(0xff232233);
+  static const Color cardColor = Color(0xff2c2b3e);
+  static const Color smallText = Color(0xffB89E9E);
+  static const Color white = Color(0xFFFFFFFF);
+  static const Color background = Color(0xFF181828);
+  static const Color black = Color(0xff000000);
+
 }

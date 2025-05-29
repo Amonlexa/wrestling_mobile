@@ -36,7 +36,7 @@ class WrestlingFormField extends StatelessWidget {
         keyboardType: inputType,
         decoration: InputDecoration(
           counterText: '',
-          fillColor: AppColors.colorBottomNav,
+          fillColor: AppColors.bottomNav,
           filled: true,
           contentPadding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0),
           hintText: hintText, alignLabelWithHint: true ,hintStyle: const TextStyle(fontFamily: 'Crimson',fontSize: 13,fontWeight: FontWeight.bold,color: Color(0xffB89E9E)),

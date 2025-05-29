@@ -108,9 +108,9 @@ class _VideosScreen extends State<VideosScreen> with TickerProviderStateMixin{
                 controller: _controller_tab,
                 children: state.pages.map((page) {
                   return RefreshIndicator(
-                    color: AppColors.colorRed,
+                    color: AppColors.accent,
                       strokeWidth: 2.75,
-                      backgroundColor: AppColors.colorBackground,
+                      backgroundColor: AppColors.background,
                       onRefresh: () async {
                       return await context.read<VideosCubit>().onGetVideos(true);
                     },

@@ -43,7 +43,7 @@ class VideoCard extends StatelessWidget {
         },
         child: Column(
           children: [
-            const Icon(Icons.play_circle,color: AppColors.colorRed,size: 120),
+            const Icon(Icons.play_circle,color: AppColors.accent,size: 120),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

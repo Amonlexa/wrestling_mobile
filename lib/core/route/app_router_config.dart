@@ -1,7 +1,7 @@
 import 'package:wrestling_hub/src/data/main/models/news.dart';
 import 'package:wrestling_hub/src/data/video/models/video.dart';
 import 'package:wrestling_hub/src/presentation/auth/screens/confirm_code_screen.dart';
-import 'package:wrestling_hub/src/presentation/auth/screens/number_phone_screen.dart';
+import 'package:wrestling_hub/src/presentation/auth/screens/sign_in_screen.dart';
 import 'package:wrestling_hub/src/presentation/auth/screens/onboarding_screen.dart';
 import 'package:wrestling_hub/src/presentation/auth/screens/privacy_policy_screen.dart';
 import 'package:wrestling_hub/src/presentation/auth/screens/splash_screen.dart';
@@ -34,7 +34,7 @@ class AppRouterConfig {
         GoRoute(
             path: AppRoute.auth,
             name: AppRoute.auth,
-            builder: (BuildContext context,state) => const NumberPhoneScreen()
+            builder: (BuildContext context,state) => const SignInScreen()
         ),
         GoRoute(
           path: '/sms/:number',

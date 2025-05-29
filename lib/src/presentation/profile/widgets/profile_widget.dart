@@ -18,7 +18,7 @@ class ProfileWidget extends StatelessWidget {
     return Container(
         decoration: BoxDecoration(
           shape: BoxShape.rectangle,
-          border: Border.all(color: AppColors.colorRed, width: 1),
+          border: Border.all(color: AppColors.accent, width: 1),
           borderRadius: BorderRadius.circular(90),
         ),
       child: avatar!.isEmpty ? Icon(Icons.account_circle_outlined, color: Colors.white, size: height) : ShowImage(image: avatar!, width: width, circular: 90,height: height,isCard: false,)

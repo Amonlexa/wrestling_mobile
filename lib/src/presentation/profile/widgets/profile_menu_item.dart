@@ -32,12 +32,12 @@ class ProfileMenuItem extends StatelessWidget {
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: AppColors.colorBottomNav
+                  color: AppColors.bottomNav
                 ),
                 child: Icon(icon,size: 20,color: Colors.white),
               ),
               const SizedBox(width: 5),
-              Text(title,style:Theme.of(context).textTheme.labelSmall,),
+              Text(title,style:Theme.of(context).textTheme.bodyMedium),
             ],
           ),
           endIcon ? const Icon(Icons.arrow_forward,color: Colors.white) : const SizedBox()

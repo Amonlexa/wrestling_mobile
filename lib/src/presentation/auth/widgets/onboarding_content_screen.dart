@@ -26,12 +26,12 @@ class OnBoardingContentScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(title, style: const TextStyle(fontSize: 16, fontFamily: 'Montserrat', fontWeight: FontWeight.w900, letterSpacing: -1), textAlign: TextAlign.center),
+          Text(title, style: const TextStyle(fontSize: 16, fontFamily: 'Open Sans', fontWeight: FontWeight.w900, letterSpacing: -1), textAlign: TextAlign.center),
           const SizedBox(height: 20),
           SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Align(alignment: Alignment.center, child: Text(description, style: const TextStyle(fontSize: 15, fontFamily: 'Roboto',),textAlign: TextAlign.start)),
+              child: Align(alignment: Alignment.center, child: Text(description, style: Theme.of(context).textTheme.bodyMedium,textAlign: TextAlign.start)),
             ),
           ),
         ],

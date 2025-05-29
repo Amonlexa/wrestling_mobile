@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
-import 'package:wrestling_hub/core/constants/app_colors.dart';
-import 'package:wrestling_hub/core/constants/app_config.dart';
 import 'package:wrestling_hub/core/utils/wrestling_snackbar.dart';
 import 'package:wrestling_hub/src/presentation/shared/widgets/modal_bottom_image_picker.dart';
 import 'package:wrestling_hub/src/presentation/shared/widgets/show_image.dart';
@@ -90,10 +88,8 @@ class ProfileEditScreen extends StatelessWidget {
                        ),
                        Padding(
                          padding: const EdgeInsets.all(12.0),
-                         child: WrestlingButton(
-                             height: 40,
-                             titleWidget: const Text('Выбрать фото', style: TextStyle(color: Colors.white, fontSize: 15, fontFamily: 'Crimson')),
-                             primaryColor: AppColors.colorBottomNav,
+                         child: AppButton(
+                             title: 'Выбрать фото',
                              isFilled: true,
                              onPressed: () {
                                ModalBottomImagePicker(
@@ -158,10 +154,8 @@ class ProfileEditScreen extends StatelessWidget {
                        ),
                        Padding(
                          padding: const EdgeInsets.symmetric(vertical: 6.0),
-                         child: WrestlingButton(
-                             height: 40,
-                             titleWidget: const Text('Сохранить', style: TextStyle(color: Colors.white, fontSize: 15, fontFamily: 'Crimson')),
-                             primaryColor: AppColors.colorRed,
+                         child: AppButton(
+                             title: 'Сохранить',
                              isFilled: true,
                              onPressed: () {
                                if(firstNameController.text.isEmpty || lastNameController.text.isEmpty || patronymicController.text.isEmpty) {

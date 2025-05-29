@@ -93,7 +93,7 @@ class _FullNewsScreen extends State<FullNewsScreen>  {
                    String content = '${state.full!.title}\n${state.full!.description}\nИсточник:${state.full!.link}\nСкачать приложение: ${AppUrls.storeApp}';
                    await Share.share(content);
                    },
-                 icon: SvgPicture.asset(AppResources.iconShare, colorFilter: const ColorFilter.mode(AppColors.colorRed, BlendMode.srcIn))
+                 icon: SvgPicture.asset(AppResources.iconShare, colorFilter: const ColorFilter.mode(AppColors.accent, BlendMode.srcIn))
              ),
             ],
          ) : AppBar(),
@@ -140,17 +140,15 @@ class _FullNewsScreen extends State<FullNewsScreen>  {
                      effect: const ScrollingDotsEffect(
                          dotHeight: 5,
                          dotWidth: 5,
-                         activeDotColor: AppColors.colorRed,
+                         activeDotColor: AppColors.accent,
                          spacing: 5.0
                      ),
                      onDotClicked: (index) => pageImagesController!.animateToPage(index, duration: const Duration(milliseconds: 500), curve: Curves.easeIn)
                  ) : const SizedBox(),                 const SizedBox(height: 10),
                  Text('${state.full!.description}',style:Theme.of(context).textTheme.bodyMedium, textAlign: TextAlign.start,),
                  const SizedBox(height: 15),
-                 state.full!.link!.isNotEmpty ? WrestlingButton(
-                     height: 50,
-                     titleWidget: const Text('Открыть источник', style: TextStyle(color: Colors.white, fontSize: 15, fontFamily: 'Roboto')),
-                     primaryColor: AppColors.colorRed,
+                 state.full!.link!.isNotEmpty ? AppButton(
+                     title: 'Открыть источник',
                      isFilled: true,
                      onPressed: () {
                        launchUrl(Uri.parse(state.full!.link!));

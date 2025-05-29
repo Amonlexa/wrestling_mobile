@@ -47,13 +47,11 @@ class VideoInfoScreen extends StatelessWidget {
                   'Мы используем технологии VK для показа видео, и это не нарушает правил платформы.\n\nВаша статистика просмотров в VK не влияет на работу проекта, а только помогает улучшить его и популяризировать вольную борьбу.\nЕсли вы против использования ваших материалов, пожалуйста, напишите в нашу поддержку.\n\nЭтот проект создан для популяризации вольной борьбы и развития спортивного сообщества.',
                   style: TextStyle(fontSize: 16),
                 ),
-                WrestlingButton(
-                    height: 40,
-                    titleWidget: const Text('Написать в поддержку', style: const TextStyle(color: Colors.white, fontSize: 15, fontFamily: 'Crimson')),
-                    primaryColor: AppColors.colorRed,
+                AppButton(
+                    title:'Написать в поддержку',
                     isFilled: true,
                     onPressed: () async {
-                      const ModalBottomFeedback().show(context);
+                      ModalBottomFeedback().show(context);
                     }
                 ),
               ],

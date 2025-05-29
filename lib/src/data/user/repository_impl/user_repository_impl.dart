@@ -6,21 +6,23 @@ import 'package:wrestling_hub/core/resources/data_state_auth.dart';
 import 'package:wrestling_hub/core/utils/extensions/extensions.dart';
 import 'package:logger/logger.dart';
 import 'package:wrestling_hub/src/data/user/data_source/local/user_local_data_source.dart';
-import 'package:wrestling_hub/src/data/user/data_source/remote/user_remote_data_source.dart';
+import 'package:wrestling_hub/src/data/user/data_source/remote/api_data_source.dart';
 import 'package:wrestling_hub/src/data/user/models/user.dart';
 import 'package:wrestling_hub/src/data/user/data_source/local/user_data.dart';
 import 'package:wrestling_hub/src/domain/user/repository/user_repository.dart';
-
+import 'package:google_sign_in/google_sign_in.dart';
 class UserRepositoryImpl extends UserRepository {
 
 
   final UserLocalDataSource _localDataSource;
-  final UserRemoteDataSource _remoteDataSource;
+  final UserApiDataSource _remoteDataSource;
   final Logger _logger;
   final UserData _userData;
+  final GoogleSignIn _googleSignIn;
 
 
-  UserRepositoryImpl(this._localDataSource, this._remoteDataSource, this._logger, this._userData);
+
+  UserRepositoryImpl(this._localDataSource, this._remoteDataSource, this._logger, this._userData, this._googleSignIn);
 
   @override
   Future<DataState<User>> getLocalUser() async {
@@ -117,6 +119,37 @@ class UserRepositoryImpl extends UserRepository {
     } on DioException catch (e) {
       _logger.e("error_log_DioException", error: e);
       return DataFailed(e.error.toString());
+    }
+  }
+
+  @override
+  Future<DataState<User>> signInGoogle(String token) async {
+    try{
+      final httpResponse = await _remoteDataSource.signInGoogle(token);
+      if (httpResponse.response.statusCode == HttpStatus.ok) {
+        _userData.currentUser = httpResponse.data;
+        return DataSuccess(httpResponse.data);
+      } else {
+        return const DataFailed("Ошибка");
+      }
+    }on DioException catch (e) {
+      _logger.e("error_log_DioException", error: e.error.toString());
+      return DataFailed(e.error.toString());
+    }
+  }
+
+  @override
+  Future<DataState<String>> getTokenGoogleAuth() async {
+    try {
+      final GoogleSignInAccount? account = await _googleSignIn.signIn();
+      if (account == null) throw Exception("User canceled");
+
+      final GoogleSignInAuthentication auth = await account.authentication;
+      print('idToken: ${auth.idToken}'); // <-- должен быть не null
+      return DataSuccess(auth.idToken!);
+    } catch (error) {
+      print("Error during sign-in: $error");
+      return DataFailed(error.toString());
     }
   }
 

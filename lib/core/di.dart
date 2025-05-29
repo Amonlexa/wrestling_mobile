@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:wrestling_hub/core/constants/app_config.dart';
 import 'package:wrestling_hub/core/constants/app_hive_boxes.dart';
 import 'package:wrestling_hub/core/services/firebase/firebase_options.dart';
@@ -8,7 +9,7 @@ import 'package:wrestling_hub/src/data/main/data_source/local/main_local_data_so
 import 'package:wrestling_hub/src/data/main/models/news.dart';
 import 'package:wrestling_hub/src/data/main/repository/main_repository_impl.dart';
 import 'package:wrestling_hub/src/data/user/data_source/local/user_local_data_source.dart';
-import 'package:wrestling_hub/src/data/user/data_source/remote/user_remote_data_source.dart';
+import 'package:wrestling_hub/src/data/user/data_source/remote/api_data_source.dart';
 import 'package:wrestling_hub/src/data/user/repository_impl/user_repository_impl.dart';
 import 'package:wrestling_hub/src/data/user/data_source/local/user_data.dart';
 import 'package:wrestling_hub/src/data/video/data_source/api/video_remote_data_source.dart';
@@ -30,8 +31,10 @@ import 'package:wrestling_hub/src/domain/user/usecases/confirm_code_use_case.dar
 import 'package:wrestling_hub/src/domain/user/usecases/delete_user_usecase.dart';
 import 'package:wrestling_hub/src/domain/user/usecases/edit_user_usecase.dart';
 import 'package:wrestling_hub/src/domain/user/usecases/get_local_user_usecase.dart';
+import 'package:wrestling_hub/src/domain/user/usecases/get_token_google_use_case.dart';
 import 'package:wrestling_hub/src/domain/user/usecases/get_user_use_case.dart';
 import 'package:wrestling_hub/src/domain/user/usecases/send_image_server_usecase.dart';
+import 'package:wrestling_hub/src/domain/user/usecases/sign_out_google_usecase.dart';
 import 'package:wrestling_hub/src/domain/video/repository/video_repository.dart';
 import 'package:wrestling_hub/src/domain/video/usecases/add_video_usecase.dart';
 import 'package:wrestling_hub/src/domain/video/usecases/delete_video_usecase.dart';
@@ -39,7 +42,7 @@ import 'package:wrestling_hub/src/domain/video/usecases/get_favorite_videos_usec
 import 'package:wrestling_hub/src/domain/video/usecases/get_videos_usecase.dart';
 import 'package:wrestling_hub/src/domain/video/usecases/is_favorite_video_usecase.dart';
 import 'package:wrestling_hub/src/presentation/auth/blocs/auth/auth_bloc.dart';
-import 'package:wrestling_hub/src/presentation/auth/blocs/number_phone/number_phone_bloc.dart';
+import 'package:wrestling_hub/src/presentation/auth/blocs/sign_in/sign_in_cubit.dart';
 import 'package:wrestling_hub/src/presentation/auth/blocs/splash/splash_bloc.dart';
 import 'package:wrestling_hub/src/presentation/favorites/blocs/favorite_bloc.dart';
 import 'package:dio/dio.dart';
@@ -76,14 +79,19 @@ Future<void> initializeDependencies() async {
   //dependencies
   sl.registerSingleton<Dio>(Dio());
   sl.registerSingleton<Logger>(Logger());
+  sl.registerSingleton<GoogleSignIn>(GoogleSignIn(
+      clientId: AppConfig.googleOauthClientID,
+      serverClientId: AppConfig.googleOauthServerClientID,
+      scopes: ['openid', 'email', 'https://www.googleapis.com/auth/userinfo.profile']));
+
 
   // Data sources
   sl.registerSingleton<MainDataSource>(MainDataSource(sl()));
   sl.registerSingleton<MainLocalDataSource>(MainLocalDataSource(boxNews));
   sl.registerSingleton<MainRepository>(MainRepositoryImpl(sl(), sl(),sl()));
   sl.registerSingleton<UserLocalDataSource>(UserLocalDataSource(userData));
-  sl.registerSingleton<UserRemoteDataSource>(UserRemoteDataSource(sl()));
-  sl.registerSingleton<UserRepository>(UserRepositoryImpl(sl(), sl(),sl(),userData));
+  sl.registerSingleton<UserApiDataSource>(UserApiDataSource(sl()));
+  sl.registerSingleton<UserRepository>(UserRepositoryImpl(sl(), sl(),sl(),userData,sl()));
   sl.registerSingleton<VideoRemoteDataSource>(VideoRemoteDataSource(sl()));
   sl.registerSingleton<VideoLocalDataSource>(VideoLocalDataSource(boxVideos));
   sl.registerSingleton<VideoRepository>(VideoRepositoryImpl(sl(),sl(),sl()));
@@ -95,6 +103,8 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<GetCommentsNewsUseCase>(GetCommentsNewsUseCase(sl()));
   sl.registerSingleton<SendNewsCommentUseCase>(SendNewsCommentUseCase(sl()));
   sl.registerSingleton<ConfirmCodeUseCase>(ConfirmCodeUseCase(sl()));
+  sl.registerSingleton<GetTokenGoogleUseCase>(GetTokenGoogleUseCase(sl()));
+  sl.registerSingleton<SignOutGoogleUseCase>(SignOutGoogleUseCase(sl()));
   sl.registerSingleton<GetUserUseCase>(GetUserUseCase(sl()));
   sl.registerSingleton<GetLocalUserUseCase>(GetLocalUserUseCase(sl()));
   sl.registerSingleton<EditUserUseCase>(EditUserUseCase(sl()));
@@ -119,8 +129,8 @@ Future<void> initializeDependencies() async {
   sl.registerFactory<DetailsNewsBloc>(() => DetailsNewsBloc(sl(), sl(),sl(),sl(),sl()));
   sl.registerFactory<SearchNewsBloc>(() => SearchNewsBloc(sl(), sl()));
   sl.registerFactory<NewsCommentBloc>(() => NewsCommentBloc(sl(),sl(),sl(),userData));
-  sl.registerFactory<AuthBloc>(() => AuthBloc(sl(),sl(),sl()));
-  sl.registerFactory<NumberPhoneBloc>(() => NumberPhoneBloc());
+  sl.registerFactory<AuthBloc>(() => AuthBloc(sl()));
+  sl.registerFactory<SignInCubit>(() => SignInCubit(sl(),sl()));
   sl.registerFactory<ProfileBloc>(() => ProfileBloc(sl(),sl(),userData));
   sl.registerFactory<FavoriteBloc>(() => FavoriteBloc(sl(),sl()));
   sl.registerFactory<SplashBloc>(() => SplashBloc(sl(),sl(),userData));

@@ -2,7 +2,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:wrestling_hub/core/constants/app_colors.dart';
-import 'package:wrestling_hub/core/constants/app_config.dart';
 import 'package:wrestling_hub/core/constants/app_urls.dart';
 import 'package:wrestling_hub/src/presentation/auth/widgets/number_form_field.dart';
 
@@ -23,7 +22,7 @@ class ModalBottomAuth {
     Widget cancelButton = TextButton(
       child: const Text("Закрыть", style: TextStyle(fontSize: 14,
           fontFamily: 'Crimson',
-          color: AppColors.colorSmallText,
+          color: AppColors.smallText,
           fontWeight: FontWeight.normal),),
       onPressed: () {
         Navigator.of(context).pop(false);
@@ -33,18 +32,18 @@ class ModalBottomAuth {
     Widget sendButton = TextButton(
       child: const Text("Авторизоваться", style: TextStyle(fontSize: 14,
           fontFamily: 'Crimson',
-          color: AppColors.colorSmallText,
+          color: AppColors.smallText,
           fontWeight: FontWeight.normal),),
       onPressed: () {
         callback(numberController.text);
       }
     );
 
-    const noUnderlineStyle = TextStyle(fontWeight: FontWeight.normal, fontSize: 14, fontFamily: 'Crimson', color: AppColors.colorSmallText);
+    const noUnderlineStyle = TextStyle(fontWeight: FontWeight.normal, fontSize: 14, fontFamily: 'Crimson', color: AppColors.smallText);
 
 
     showModalBottomSheet(
-        backgroundColor: AppColors.colorBottomNav,
+        backgroundColor: AppColors.bottomNav,
         context: context,
         builder: (builder) {
           return Padding(
@@ -54,7 +53,7 @@ class ModalBottomAuth {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Text("Авторизация",style: TextStyle(fontFamily:'Crimson',fontWeight: FontWeight.w700,fontSize: 15,color: AppColors.colorSmallText)),
+                    const Text("Авторизация",style: TextStyle(fontFamily:'Crimson',fontWeight: FontWeight.w700,fontSize: 15,color: AppColors.smallText)),
                     const SizedBox(height: 12),
                     NumberFormField(
                         controller: numberController,

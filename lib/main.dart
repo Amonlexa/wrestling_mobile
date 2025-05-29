@@ -1,9 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'core/wrestling_hub_app.dart';
 import 'core/di.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initializeDependencies();
+  setWhiteStatusBar();
   runApp(const WrestlingSakhaApp());
 }
+
+void setWhiteStatusBar() {
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent, // Прозрачный фон
+      statusBarIconBrightness: Brightness.light, // Белые иконки (Android)
+      statusBarBrightness: Brightness.dark,  // Для iOS (влияет на текст)
+    ),
+  );
+}
+

@@ -46,6 +46,7 @@ class _MainScreenState extends State<MainScreen>  {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Text('Wrestling Hub',style: Theme.of(context).textTheme.titleLarge),
+        centerTitle: true,
         actions: [
           IconButton(
               onPressed: () {
@@ -57,9 +58,9 @@ class _MainScreenState extends State<MainScreen>  {
       ),
       body: RefreshIndicator(
         key: _refreshKey,
-        color: AppColors.colorAccent,
+        color: AppColors.accent,
         strokeWidth: 2.75,
-        backgroundColor: AppColors.colorBackground,
+        backgroundColor: AppColors.background,
         onRefresh: () async {
           context.read<MainBloc>().page = 0;
           return context.read<MainBloc>().add(NewsFetchEvent());
