@@ -132,7 +132,6 @@ class _UserApiDataSource implements UserApiDataSource {
 
   @override
   Future<HttpResponse<User>> signInGoogle(String token) async {
-    print('send google token');
     final request = await client.get(
         AppUrls.signInGoogle,
         data: json.encode(
@@ -142,11 +141,7 @@ class _UserApiDataSource implements UserApiDataSource {
         ));
     final User value;
 
-    print(request.data);
-
     final parsed = jsonDecode(request.data) ?? [];
-
-    print('google user $parsed');
 
     try{
       value = User.fromJson(parsed['user']);

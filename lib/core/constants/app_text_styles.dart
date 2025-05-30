@@ -54,6 +54,12 @@ class AppTextStyles {
     decoration: TextDecoration.underline,
   );
 
+  static const TextStyle warmTextStyle = TextStyle(
+    fontSize: 13,
+    color: Colors.red,
+      fontWeight: FontWeight.bold
+  );
+
   static TextStyle buttonLightStyle = GoogleFonts.openSans(
     fontSize: 15,
     color: AppColors.black,

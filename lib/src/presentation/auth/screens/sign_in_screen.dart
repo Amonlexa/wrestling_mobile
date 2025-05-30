@@ -1,16 +1,12 @@
-import 'package:wrestling_hub/core/constants/app_colors.dart';
 import 'package:wrestling_hub/core/constants/app_config.dart';
 import 'package:wrestling_hub/core/constants/app_resource.dart';
 import 'package:wrestling_hub/core/constants/app_strings.dart';
 import 'package:wrestling_hub/core/constants/app_text_styles.dart';
-import 'package:wrestling_hub/core/constants/app_urls.dart';
 import 'package:wrestling_hub/core/route/app_router.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:wrestling_hub/src/presentation/auth/blocs/sign_in/sign_in_cubit.dart';
 import 'package:wrestling_hub/src/presentation/auth/blocs/sign_in/sign_in_state.dart';
 import 'package:wrestling_hub/src/presentation/auth/widgets/privacy_policy_text_widget.dart';
@@ -33,12 +29,13 @@ class _SignInScreen extends State<SignInScreen>{
 
   final TextEditingController numberController = TextEditingController(text: '+ 7');
 
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<SignInCubit, SignInState>(
       listener: (context, state) {
-        // Можно добавить обработку состояния
+        if (state is SignInFailureState) {
+          Fluttertoast.showToast(msg: state.message);
+        }
       },
       builder: (context, state) {
         return DismissibleKeyboardWidget(
@@ -58,6 +55,13 @@ class _SignInScreen extends State<SignInScreen>{
                       AppStrings.authTitle,
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
+                    if(state is SignInFormState && !state.isPhoneNumberValid)
+                      const Center(
+                        child: Text(
+                          AppStrings.authWarmMessage,
+                          style: AppTextStyles.warmTextStyle,
+                        ),
+                      ),
                     NumberFormField(
                       controller: numberController,
                       inputType: TextInputType.phone,
@@ -71,17 +75,14 @@ class _SignInScreen extends State<SignInScreen>{
                     ),
                     AppButton(
                       title: AppStrings.next,
+                      isEnabled: state is SignInFormState && state.isPhoneNumberValid ?? false,
                       onPressed: () {
-                        if (numberController.text.length > 15) {
-                          GoRouter.of(context).pushReplacementNamed(
-                            AppRoute.sms,
-                            pathParameters: {
-                              'number': numberController.text.toString()
-                            },
-                          );
-                        } else {
-                          Fluttertoast.showToast(msg: AppStrings.authEnterCorrect);
-                        }
+                        GoRouter.of(context).pushNamed(
+                          AppRoute.sms,
+                          pathParameters: {
+                            'number': numberController.text.toString()
+                          },
+                        );
                       },
                     ),
                     const Spacer(),

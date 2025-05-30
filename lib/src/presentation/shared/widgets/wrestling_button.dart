@@ -12,6 +12,7 @@ class AppButton extends StatelessWidget {
   final VoidCallback onPressed;
   final double? height;
   final double? width;
+  final bool? isEnabled;
 
   const AppButton({
     super.key,
@@ -19,6 +20,7 @@ class AppButton extends StatelessWidget {
     required this.onPressed,
     this.height,
     this.width,
+    this.isEnabled = true,
   });
 
 
@@ -54,17 +56,19 @@ class AppButton extends StatelessWidget {
 
 
   Widget _initial(BuildContext context) {
+    final Color buttonColor = isEnabled == true ? AppColors.accent : Colors.grey;
     return ElevatedButton(
-        onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.accent,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          minimumSize: Size(
-              width ?? MediaQuery.of(context).size.width,
-              height ?? 45
-          ),
+      onPressed: isEnabled == true ? onPressed : null,
+      style: ElevatedButton.styleFrom(
+        disabledBackgroundColor: Colors.grey,
+        backgroundColor: buttonColor,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        minimumSize: Size(
+          width ?? MediaQuery.of(context).size.width,
+          height ?? 45,
         ),
-        child: Text(title, style: AppTextStyles.buttonDarkStyle)
+      ),
+      child: Text(title, style: AppTextStyles.buttonDarkStyle),
     );
   }
 

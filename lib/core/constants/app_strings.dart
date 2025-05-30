@@ -8,6 +8,7 @@ class AppStrings {
 
   //sign in
   static const String authTitle = 'Авторизация';
+  static const String authWarmMessage = 'Введите корректный номер телефона';
   static const String authDescription = 'Мы отправим вам текстовое сообщение с кодом подтверждения';
   static const String authHintNumber = '+ (9999) 111-11-11';
   static const String authContinueWithAcc = 'Продолжить с аккаунтом';

@@ -17,5 +17,10 @@ final appTheme = ThemeData(
       bodySmall: TextStyle(fontSize: 12, fontWeight: FontWeight.normal, color: Colors.white),
     ),
   ),
+  textSelectionTheme: const TextSelectionThemeData(
+    cursorColor: AppColors.accent,
+    selectionColor: AppColors.accent,
+    selectionHandleColor: AppColors.accent
+  ),
   useMaterial3: true,
 );

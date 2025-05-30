@@ -32,14 +32,12 @@ class WrestlingFormField extends StatelessWidget {
         maxLines: maxLine,
         minLines: minLine,
         maxLength: maxLength,
-        style: const TextStyle(fontFamily: 'Crimson',fontSize: 16,fontWeight: FontWeight.bold,color: Color(0xffB89E9E)),
         keyboardType: inputType,
         decoration: InputDecoration(
           counterText: '',
           fillColor: AppColors.bottomNav,
           filled: true,
           contentPadding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0),
-          hintText: hintText, alignLabelWithHint: true ,hintStyle: const TextStyle(fontFamily: 'Crimson',fontSize: 13,fontWeight: FontWeight.bold,color: Color(0xffB89E9E)),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(18),
           ),

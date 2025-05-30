@@ -33,7 +33,6 @@ class NumberFormField extends StatelessWidget {
       controller: controller,
       maxLines: maxLine,
       minLines: minLine,
-      cursorColor: AppColors.accent,
       maxLength: maxLength,
       style: Theme.of(context).textTheme.bodyMedium,
       keyboardType: inputType,
