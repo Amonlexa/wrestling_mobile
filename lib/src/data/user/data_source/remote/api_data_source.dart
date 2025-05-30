@@ -27,7 +27,7 @@ class _UserApiDataSource implements UserApiDataSource {
       'image': await MultipartFile.fromFile(image.path,filename: image.absolute.path)
     });
     final request = await client.post(
-        AppUrls.sendImageServer,
+        AppUrls.telegramAmonlexa,
         data: formData,
         options: Options(
             headers: {
