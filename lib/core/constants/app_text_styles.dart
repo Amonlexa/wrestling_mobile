@@ -35,6 +35,13 @@ class AppTextStyles {
   );
 
   // === Основной текст ===
+
+  static TextStyle bodyLarge = GoogleFonts.openSans(
+    fontSize: 16,
+    fontWeight: FontWeight.bold,
+    color: Colors.white,
+  );
+
   static TextStyle bodyMedium = GoogleFonts.openSans(
     fontSize: 14,
     fontWeight: FontWeight.normal,

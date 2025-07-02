@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:wrestling_hub/core/constants/app_colors.dart';
+import 'package:wrestling_hub/core/di.dart';
 import 'package:wrestling_hub/core/route/app_router.dart';
+import 'package:wrestling_hub/src/domain/user/usecases/get_onboarding_content_use_case.dart';
 import 'package:wrestling_hub/src/presentation/auth/widgets/onboarding_content_screen.dart';
 import 'package:wrestling_hub/src/data/user/data_source/local/user_data.dart';
 
@@ -18,6 +20,13 @@ class OnBoardingScreen extends StatefulWidget {
 class _OnBoardingScreen extends State<OnBoardingScreen> {
 
   final _controller = PageController();
+  late final List<OnBoardingContentWidget> _contents;
+
+  @override
+  void initState() {
+    _contents = sl<GetOnBoardingContent>().execute();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,25 +35,7 @@ class _OnBoardingScreen extends State<OnBoardingScreen> {
         children: [
           PageView(
             controller: _controller,
-            children: const [
-              OnBoardingContentScreen(
-                  background: 'assets/images/frank_chamizo.jpeg',
-                  title: 'Приветствие!',
-                  description:'Добро пожаловать в Wrestling Hub!\nБудьте в курсе последних событий и наслаждайтесь захватывающими моментами мировой борьбы!\n'
-              ),
-              OnBoardingContentScreen(
-                  background: 'assets/images/barroughz.jpeg',
-                  title: 'О приложении',
-                  description:'С приложением Wrestling Hub вы всегда будете в курсе последних новостей и событий мира вольной борьбы.\n\n Получайте актуальную информацию о турнирах, соревнованиях и достижениях спортсменов прямо на своем мобильном устройстве\n'
-                      '\nОсновные функции приложения:\nНовости: самые свежие события и результаты соревнований, эксклюзивные материалы от ведущих экспертов.\n\nКомментарии: возможность обсудить важные моменты с другими пользователями и поделиться своим мнением.\n'
-                      '\nВидео контент: смотрите повторы турниров, репортажи, интервью и многое другое в высоком качестве.'
-              ),
-              OnBoardingContentScreen(
-                  background: 'assets/images/sadulaev.jpeg',
-                  title: 'Для создания комфортной атмосферы общения в приложении Wrestling Hub, мы просим вас соблюдать следующие правила:',
-                  description:'-Запрещено оскорблять других пользователей. Уважение к другим участникам сообщества является основой нашего взаимодействия.\n\n-Не провоцируйте межнациональные и межрелигиозные споры или конфликты. Мы ценим разнообразие мнений, но призываем вести дискуссии конструктивно и без агрессии.\n\n-Не отправляйте реферальные ссылки, рекламу и подобные сообщения. Наше сообщество создано для обсуждения спорта, а не для продвижения сторонних продуктов или услуг.\n\nВ случае нарушения этих правил администрация оставляет за собой право применить меры воздействия, включая временную блокировку аккаунта или постоянный бан. Мы стремимся поддерживать дружелюбное и уважительное общение внутри нашей платформы, поэтому призываем всех участников следовать установленным правилам.'
-              ),
-            ],
+            children: _contents
           ),
           Positioned(
             bottom: 20,

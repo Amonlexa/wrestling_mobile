@@ -9,9 +9,9 @@ class AppLogoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      flex: 2,
+      flex: 1,
       child: AspectRatio(
-        aspectRatio: 1.5,
+        aspectRatio: 1.1,
         child: Center(
           child: ClipRRect(
             borderRadius: BorderRadius.circular(30),

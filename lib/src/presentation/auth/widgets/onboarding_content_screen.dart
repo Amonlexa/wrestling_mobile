@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class OnBoardingContentScreen extends StatelessWidget {
+class OnBoardingContentWidget extends StatelessWidget {
 
   final String background;
   final String title;
   final String description;
 
-  const OnBoardingContentScreen({super.key, required this.background, required this.title, required this.description});
+  const OnBoardingContentWidget({super.key, required this.background, required this.title, required this.description});
 
 
 

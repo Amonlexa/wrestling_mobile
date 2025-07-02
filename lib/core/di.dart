@@ -31,6 +31,7 @@ import 'package:wrestling_hub/src/domain/user/usecases/confirm_code_use_case.dar
 import 'package:wrestling_hub/src/domain/user/usecases/delete_user_usecase.dart';
 import 'package:wrestling_hub/src/domain/user/usecases/edit_user_usecase.dart';
 import 'package:wrestling_hub/src/domain/user/usecases/get_local_user_usecase.dart';
+import 'package:wrestling_hub/src/domain/user/usecases/get_onboarding_content_use_case.dart';
 import 'package:wrestling_hub/src/domain/user/usecases/get_token_google_use_case.dart';
 import 'package:wrestling_hub/src/domain/user/usecases/get_user_use_case.dart';
 import 'package:wrestling_hub/src/domain/user/usecases/send_image_server_usecase.dart';
@@ -121,6 +122,7 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<DeleteFavoriteVideoUseCase>(DeleteFavoriteVideoUseCase(sl()));
   sl.registerSingleton<GetFavoriteVideosUseCase>(GetFavoriteVideosUseCase(sl()));
   sl.registerSingleton<GetVideosUseCase>(GetVideosUseCase(sl()));
+  sl.registerSingleton<GetOnBoardingContent>(GetOnBoardingContent());
 
 
   //services

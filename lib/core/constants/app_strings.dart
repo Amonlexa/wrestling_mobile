@@ -5,6 +5,7 @@ class AppStrings {
   static const String appFor = 'for Amonlexa';
   static const String repeat = 'Повторить';
   static const String next = 'Далее';
+  static const String confirm = 'Потвердить';
 
   //sign in
   static const String authTitle = 'Авторизация';
@@ -18,4 +19,11 @@ class AppStrings {
   static const String authPrivacyStart = 'Нажимая кнопку “Далее”, я подтверждаю, что ознакомлен(а) с условием ';
   static const String authPrivacyCenter = 'Политики конфиденциальности';
   static const String authPrivacyEnd = ' и принимаю  условия';
+  //confirm  code
+  static const String otpWrongCode = "Код неверный";
+  static const String otpSuccessCode = "Вы успешно авторизованы";
+  static const String otpNavigateToTelegramBotForCode = "Перейдите в телеграм бот для получения кода";
+  static const String otpEnterCode = "Введите код";
+  static const String otpGoTelegramBot = "Перейти к телеграм боту";
+  static const String otpNeedHelp = "Нужна помощь?";
 }

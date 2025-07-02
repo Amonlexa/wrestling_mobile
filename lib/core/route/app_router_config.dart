@@ -39,7 +39,7 @@ class AppRouterConfig {
           path: '/sms/:number',
           name: AppRoute.sms,
           builder: (context, state)  {
-            return ConfirmSmsCode(
+            return ConfirmOtpCode(
               numberPhone: state.pathParameters['number'].toString(),
             );
           },

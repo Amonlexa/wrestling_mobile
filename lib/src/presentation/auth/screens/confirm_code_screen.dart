@@ -1,4 +1,5 @@
 import 'package:wrestling_hub/core/constants/app_colors.dart';
+import 'package:wrestling_hub/core/constants/app_strings.dart';
 import 'package:wrestling_hub/core/constants/app_urls.dart';
 import 'package:wrestling_hub/core/route/app_router.dart';
 import 'package:wrestling_hub/core/utils/wrestling_snackbar.dart';
@@ -15,10 +16,10 @@ import 'package:wrestling_hub/src/presentation/shared/widgets/modal_bottom_feedb
 import 'package:wrestling_hub/src/presentation/shared/widgets/wrestling_button.dart';
 import 'package:wrestling_hub/src/presentation/shared/widgets/wrestling_progress_bar.dart';
 
-class ConfirmSmsCode extends StatelessWidget {
+class ConfirmOtpCode extends StatelessWidget {
 
   final String numberPhone;
-  ConfirmSmsCode({super.key,required this.numberPhone});
+  ConfirmOtpCode({super.key,required this.numberPhone});
 
   final _controllerSms = TextEditingController();
 
@@ -27,18 +28,19 @@ class ConfirmSmsCode extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
+      appBar: AppBar(),
       body: BlocListener<AuthBloc, AuthState> (
         bloc: context.read(),
          listener: (BuildContext context, AuthState state) {
            if (state is AuthWrongCodeState) {
-              WrestlingSnackBar().show(context, "Код неверный");
+              WrestlingSnackBar().show(context, AppStrings.otpWrongCode);
               _controllerSms.clear();
            }
            if (state is AuthSuccessState) {
-             GoRouter.of(context).pop('auth');
-             Fluttertoast.showToast(msg: 'Вы успешно авторизованы');
+             // GoRouter.of(context).pop('auth');
+             WrestlingSnackBar().show(context, AppStrings.otpSuccessCode);
            }
-           },
+         },
       child: BlocBuilder<AuthBloc, AuthState>(
         builder: (context, state) {
           if (state is AuthLoadingState) {
@@ -51,67 +53,54 @@ class ConfirmSmsCode extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  spacing: 12,
                   children: [
-                    const SizedBox(height: 50),
-                    const Text("Перейдите в телеграм бот для получения кода",style: TextStyle(fontFamily:'Crimson',fontWeight: FontWeight.bold,fontSize: 22)),
-                    const SizedBox(height: 12),
-                    Pinput(
-                      controller: _controllerSms,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      showCursor: true,
-                      errorTextStyle: const TextStyle(fontSize: 14,fontFamily: 'Crimson', color: Colors.red,fontWeight: FontWeight.w500),
-                      defaultPinTheme: PinTheme(
-                          height: 56.0,
-                          width: 48.0,
-                          textStyle: Theme.of(context).textTheme.labelLarge,
-                          decoration: BoxDecoration(
-                              shape: BoxShape.rectangle,
-                              color: AppColors.bottomNav,
-                              borderRadius: BorderRadius.circular(15),
-                              border: state is AuthWrongCodeState ? Border.all(color: Colors.red, width: 1.0) : Border.all(color: const Color(0x24000000), width: 1.5)
-                          )
+                    Text(AppStrings.otpNavigateToTelegramBotForCode,style: Theme.of(context).textTheme.titleLarge),
+                    Center(
+                      child: Pinput(
+                        controller: _controllerSms,
+                        showCursor: true,
+                        defaultPinTheme: PinTheme(
+                            height: 56.0,
+                            width: 48.0,
+                            textStyle: Theme.of(context).textTheme.bodyLarge,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.rectangle,
+                                color: AppColors.bottomNav,
+                                borderRadius: BorderRadius.circular(15),
+                                border: state is AuthWrongCodeState ? Border.all(color: Colors.red, width: 1.0) : Border.all(color: const Color(0x24000000), width: 1.5)
+                            )
+                        ),
+                        length: 4,
                       ),
-                      length: 4,
                     ),
-                    const SizedBox(height: 24),
                     AppButton(
-                        title: 'Потвердить',
-                        onPressed: () {
-                          if(_controllerSms.text.length < 3) {
-                            Fluttertoast.showToast(msg: 'Введите код');
-                          }else{
-                            context.read<AuthBloc>().add(AuthConfirmEvent(numberPhone,_controllerSms.text));
-                          }
-                        }
+                      title: AppStrings.confirm,
+                      onPressed: () {
+                       if(_controllerSms.text.length < 3) {
+                         Fluttertoast.showToast(msg: AppStrings.otpEnterCode);
+                       }else{
+                         context.read<AuthBloc>().add(AuthConfirmEvent(numberPhone,_controllerSms.text));
+                       }
+                      }
                     ),
-                    const SizedBox(height: 24),
-                    InkWell(
-                      splashColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
+                    GestureDetector(
                       onTap: () => launchUrl(Uri.parse(AppUrls.telegramBotAuth)),
-                      child: const Row(
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
+                        spacing: 10,
                         children: [
-                          Icon(Icons.telegram_outlined,color: Colors.cyan),
-                          SizedBox(width: 10),
-                          Text("Перейти к телеграм боту",style: TextStyle(fontFamily:'Crimson',fontWeight: FontWeight.bold,fontSize: 15,color: Colors.white),textAlign: TextAlign.center,),
+                          const Icon(Icons.telegram_outlined,color: Colors.cyan),
+                          Text(AppStrings.otpGoTelegramBot,style: Theme.of(context).textTheme.bodyLarge,textAlign: TextAlign.center),
                         ],
                       ),
                     ),
-                    const SizedBox(height: 24),
                     InkWell(
                       onTap: () {
                          ModalBottomFeedback().show(context);
                       },
-                      child: const Text("Нужна помощь?",style: TextStyle(fontFamily:'Crimson',fontWeight: FontWeight.normal,fontSize: 14,color: AppColors.smallText)),
+                      child: Text(AppStrings.otpNeedHelp,style: Theme.of(context).textTheme.bodyMedium),
                     ),
-                    const SizedBox(height: 12),
-                    InkWell(
-                      onTap: () {
-                        context.goNamed(AppRoute.main);
-                      },
-                      child: const Text("Нету телеграма? пропустить",style: TextStyle(fontFamily:'Crimson',fontWeight: FontWeight.normal,fontSize: 14,color: AppColors.smallText)),
-                    )
                   ],
                 ),
             ),

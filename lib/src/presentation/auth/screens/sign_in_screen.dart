@@ -36,10 +36,14 @@ class _SignInScreen extends State<SignInScreen>{
         if (state is SignInFailureState) {
           Fluttertoast.showToast(msg: state.message);
         }
+        if(state is SignInGoogleLoggedState) {
+
+        }
       },
       builder: (context, state) {
         return DismissibleKeyboardWidget(
           child: Scaffold(
+            appBar: AppBar(),
             resizeToAvoidBottomInset: true,
             body: SafeArea(
               child: Padding(
@@ -49,8 +53,7 @@ class _SignInScreen extends State<SignInScreen>{
                   crossAxisAlignment: CrossAxisAlignment.center,
                   spacing: 10,
                   children: [
-                    const SizedBox(height: 20),
-                    const AppLogoWidget(),
+                    // const AppLogoWidget(),
                     Text(
                       AppStrings.authTitle,
                       style: Theme.of(context).textTheme.titleLarge,
