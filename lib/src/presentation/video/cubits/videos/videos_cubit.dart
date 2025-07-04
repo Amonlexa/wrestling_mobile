@@ -2,12 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:logger/logger.dart';
-import 'package:wrestling_hub/src/data/video/models/video.dart';
-import 'package:wrestling_hub/src/domain/main/usecases/add_favorite_news_usecase.dart';
-import 'package:wrestling_hub/src/domain/main/usecases/delete_favorite_news_usecase.dart';
-import 'package:wrestling_hub/src/domain/video/usecases/get_favorite_videos_usecase.dart';
+import 'package:wrestling_hub/core/constants/app_strings.dart';
 import 'package:wrestling_hub/src/domain/video/usecases/get_videos_usecase.dart';
-import 'package:wrestling_hub/src/domain/video/usecases/is_favorite_video_usecase.dart';
 import 'package:wrestling_hub/src/presentation/video/cubits/videos/videos_state.dart';
 import 'package:wrestling_hub/src/presentation/video/widgets/videos_carousel.dart';
 
@@ -35,7 +31,7 @@ class VideosCubit extends Cubit<VideosState> {
     }
 
     if (dataState.data!.isEmpty) {
-      return emit(VideosFailureState(message: 'Пусто'));
+      return emit(VideosFailureState(message: AppStrings.videosEmpty));
     }
 
     if (dataState is DataSuccess) {

@@ -31,6 +31,8 @@ class AppUrls {
   static final getCommentNews = "$serverAddress${dotenv.get('API_NEWS_COMMENTS')}";
   static final sendCommentNews = "$serverAddress${dotenv.get('API_NEWS_SEND_COMMENT')}";
 
+
+
   // static const sendImageServer = "https://files.in-reservy.ru/upload_image.php";
 
 

@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:wrestling_hub/core/constants/app_colors.dart';
+import 'package:wrestling_hub/core/constants/app_resource.dart';
 import 'package:wrestling_hub/src/presentation/shared/widgets/wrestling_progress_bar.dart';
 
 
@@ -52,7 +53,7 @@ class ShowImage extends StatelessWidget {
           shape: BoxShape.rectangle,
           borderRadius: BorderRadius.circular(circular),
           image: const DecorationImage(
-              image: AssetImage('assets/images/wrestling_logo.png'),
+              image: AssetImage(AppResources.logoApp),
               fit: BoxFit.cover
           )
       ),

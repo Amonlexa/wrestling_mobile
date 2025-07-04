@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wrestling_hub/core/constants/app_colors.dart';
+import 'package:wrestling_hub/core/constants/app_strings.dart';
 import 'package:wrestling_hub/core/utils/wrestling_snackbar.dart';
 import 'package:wrestling_hub/src/presentation/shared/widgets/error_page.dart';
 import 'package:wrestling_hub/src/presentation/shared/widgets/wrestling_form_field.dart';
@@ -52,7 +53,7 @@ class _NewsCommentsScreen extends State<NewsCommentsScreen> {
       child: Scaffold(
         appBar: AppBar(
          centerTitle: true,
-         title: Text('Комментарии',style: Theme.of(context).textTheme.titleLarge),
+         title: Text(AppStrings.commentsTitle,style: Theme.of(context).textTheme.titleLarge),
        ),
         body: BlocConsumer<NewsCommentBloc, NewsCommentState>(
          builder: (context, state) {
@@ -66,7 +67,7 @@ class _NewsCommentsScreen extends State<NewsCommentsScreen> {
                child: ErrorPage(
                  errorText: state.message,
                  icon: Icons.error_outline_sharp,
-                 buttonText: 'Повторить',
+                 buttonText: AppStrings.repeat,
                  onPress: () {
                    context.read<NewsCommentBloc>().add(NewsCommentFetchEvent(widget.idNews));
                    },
@@ -90,11 +91,11 @@ class _NewsCommentsScreen extends State<NewsCommentsScreen> {
                    ),
                    const SizedBox(height: 60),
                  ],
-               ) : const Center(child: Text('Нет комментариев')),
+               ) : const Center(child: Text(AppStrings.commentsEmpty)),
              );
            }
          return ErrorPage(
-             errorText: 'УПС',
+             errorText: AppStrings.errorUnknown,
              buttonText: '',
              onPress: () {
                context.read<NewsCommentBloc>().add(NewsCommentFetchEvent(widget.idNews));
@@ -104,7 +105,7 @@ class _NewsCommentsScreen extends State<NewsCommentsScreen> {
            },
          listener: (context, state) {
            if(state is NewsCommentFailureState) {
-             WrestlingSnackBar().show(context, "Не удалось отправить комментарий");
+             WrestlingSnackBar().show(context, AppStrings.commentsSendFailed);
            }
            if(state is NewsCommentSendSuccessState) {
              commentFormController.clear();
@@ -127,7 +128,7 @@ class _NewsCommentsScreen extends State<NewsCommentsScreen> {
                 alignment: Alignment.center,
                 child: WrestlingFormField(
                   controller: commentFormController,
-                  hintText: 'Комментарий',
+                  hintText: AppStrings.comment,
                   onChanged: (val) {
                     },
                   inputType: TextInputType.text,

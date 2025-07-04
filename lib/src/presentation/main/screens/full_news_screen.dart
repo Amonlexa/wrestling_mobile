@@ -1,6 +1,7 @@
 import 'package:widget_zoom/widget_zoom.dart';
 import 'package:wrestling_hub/core/constants/app_colors.dart';
 import 'package:wrestling_hub/core/constants/app_resource.dart';
+import 'package:wrestling_hub/core/constants/app_strings.dart';
 import 'package:wrestling_hub/core/constants/app_urls.dart';
 import 'package:wrestling_hub/core/route/app_router.dart';
 import 'package:wrestling_hub/src/data/main/models/news.dart';
@@ -56,7 +57,7 @@ class _FullNewsScreen extends State<FullNewsScreen>  {
            child: ErrorPage(
              errorText: state.error,
              icon: Icons.error_outline_sharp,
-             buttonText: 'Повторить',
+             buttonText: AppStrings.repeat,
              onPress: () {
                context.read<DetailsNewsBloc>().add(DetailsNewsFetchEvent(widget.fullNews));
              },
@@ -110,7 +111,7 @@ class _FullNewsScreen extends State<FullNewsScreen>  {
                    crossAxisAlignment: CrossAxisAlignment.start,
                    mainAxisAlignment: MainAxisAlignment.start,
                    children: [
-                     Align(alignment: Alignment.centerLeft, child: Text('Источник: ${state.full!.author}', style: Theme.of(context).textTheme.labelSmall)),
+                     Align(alignment: Alignment.centerLeft, child: Text('${AppStrings.fullNewsSource}${state.full!.author}', style: Theme.of(context).textTheme.labelSmall)),
                      Align(alignment: Alignment.centerLeft, child: Text('${state.full!.creationDateTime}', style: Theme.of(context).textTheme.labelSmall)),
                    ],
                  ),
@@ -144,17 +145,18 @@ class _FullNewsScreen extends State<FullNewsScreen>  {
                          spacing: 5.0
                      ),
                      onDotClicked: (index) => pageImagesController!.animateToPage(index, duration: const Duration(milliseconds: 500), curve: Curves.easeIn)
-                 ) : const SizedBox(),                 const SizedBox(height: 10),
+                 ) : const SizedBox(),
+                 const SizedBox(height: 10),
                  Text('${state.full!.description}',style:Theme.of(context).textTheme.bodyMedium, textAlign: TextAlign.start,),
                  const SizedBox(height: 15),
                  state.full!.link!.isNotEmpty ? AppButton(
-                     title: 'Открыть источник',
+                     title: AppStrings.fullNewsOpenSource,
                      onPressed: () {
                        launchUrl(Uri.parse(state.full!.link!));
                      }) : const SizedBox(),
                  const SizedBox(height: 15)
                ],
-             ) : const Center(child: Text("Что то пошло не так"))
+             ) : const Center(child: Text(AppStrings.errorUnknown))
        ),
         ));
       });

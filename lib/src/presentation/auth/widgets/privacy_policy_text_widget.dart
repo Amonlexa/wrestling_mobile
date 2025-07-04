@@ -24,8 +24,7 @@ class PrivacyPolicyTextWidget extends StatelessWidget {
           TextSpan(
             text: AppStrings.authPrivacyCenter,
             style: AppTextStyles.link,
-            recognizer: TapGestureRecognizer()
-              ..onTap = () => launchUrl(Uri.parse(AppUrls.privacy)),
+            recognizer: TapGestureRecognizer()..onTap = () => launchUrl(Uri.parse(AppUrls.privacy)),
           ),
           TextSpan(
             text: AppStrings.authPrivacyEnd,

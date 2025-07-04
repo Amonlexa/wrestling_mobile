@@ -6,7 +6,7 @@ import 'package:wrestling_hub/src/presentation/auth/screens/onboarding_screen.da
 import 'package:wrestling_hub/src/presentation/auth/screens/splash_screen.dart';
 import 'package:wrestling_hub/src/presentation/favorites/screens/favorites_screen.dart';
 import 'package:wrestling_hub/src/presentation/main/screens/full_news_screen.dart';
-import 'package:wrestling_hub/src/presentation/main/screens/home_screen.dart';
+import 'package:wrestling_hub/src/presentation/main/screens/main_screen.dart';
 import 'package:wrestling_hub/src/presentation/main/screens/news_comments_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';

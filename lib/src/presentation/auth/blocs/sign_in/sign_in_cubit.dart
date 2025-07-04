@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wrestling_hub/core/constants/app_strings.dart';
 import 'package:wrestling_hub/core/resources/data_state.dart';
 import 'package:wrestling_hub/core/utils/extensions/extensions.dart';
 import 'package:wrestling_hub/src/domain/user/usecases/get_token_google_use_case.dart';
@@ -28,13 +29,13 @@ class SignInCubit extends Cubit<SignInState> {
 
     final dataStateToken = await _getTokenGoogleUseCase();
     if(dataStateToken is DataFailed) {
-       emit(SignInFailureState(message: "Ошибка получения токена"));
+       emit(SignInFailureState(message: AppStrings.errorGetToken));
        return;
     }
 
     final dataStateSignOut = await _signOutGoogleUseCase(params: dataStateToken.data.toString());
     if(dataStateSignOut is DataFailed) {
-      emit(SignInFailureState(message: "Ошибка регистрации токена"));
+      emit(SignInFailureState(message: AppStrings.errorRegisterToken));
     }
     if(dataStateSignOut is DataSuccess) {
       emit(SignInGoogleLoggedState());

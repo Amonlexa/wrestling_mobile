@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:wrestling_hub/core/constants/app_strings.dart';
 import 'package:wrestling_hub/src/data/video/models/video.dart';
 import 'package:wrestling_hub/src/presentation/video/widgets/video_preview_widget.dart';
 
@@ -30,7 +31,7 @@ class VideosCarousel extends StatelessWidget {
           alignment: Alignment.center,
           height: MediaQuery.of(context).size.height / 1.5,
           child:
-            Text('В данной категории еще не\n добавили видео', style: Theme.of(context).textTheme.bodyMedium, textAlign: TextAlign.center),
+            Text(AppStrings.videosEmpty, style: Theme.of(context).textTheme.bodyMedium, textAlign: TextAlign.center),
         ),
       ),
     );

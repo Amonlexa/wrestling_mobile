@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wrestling_hub/core/constants/app_strings.dart';
 import 'package:wrestling_hub/src/data/video/models/video.dart';
 import 'package:wrestling_hub/src/presentation/video/widgets/video_preview_widget.dart';
 
@@ -29,7 +30,7 @@ class FavoritesVideosCarousel extends StatelessWidget {
           alignment: Alignment.center,
           height: MediaQuery.of(context).size.height / 1.5,
           child:
-          Text('У вас нет избранных видео', style: Theme.of(context).textTheme.bodyMedium, textAlign: TextAlign.center),
+          Text(AppStrings.favEmptyVideos, style: Theme.of(context).textTheme.bodyMedium, textAlign: TextAlign.center),
         ),
       ),
     );

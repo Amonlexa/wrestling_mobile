@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:wrestling_hub/core/constants/app_strings.dart';
 import 'package:wrestling_hub/core/resources/data_state.dart';
 import 'package:wrestling_hub/src/data/user/models/user.dart';
 import 'package:wrestling_hub/src/data/user/data_source/local/user_data.dart';
@@ -12,18 +13,15 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:logger/logger.dart';
-
-
-
 part 'edit_event.dart';
 part 'edit_state.dart';
 
 class EditBloc extends Bloc<EditEvent, EditState> {
 
-  EditUserUseCase _editProfileUseCase;
-  SendImageServerUseCase _sendImageServerUseCase;
-  DeleteUserUseCase _deleteProfileUseCase;
-  GetLocalUserUseCase _getLocalUserUseCase;
+  final EditUserUseCase _editProfileUseCase;
+  final SendImageServerUseCase _sendImageServerUseCase;
+  final DeleteUserUseCase _deleteProfileUseCase;
+  final GetLocalUserUseCase _getLocalUserUseCase;
   final Logger _logger;
   final UserData _userData;
 
@@ -47,10 +45,8 @@ class EditBloc extends Bloc<EditEvent, EditState> {
   _onGetLocalUser(EditGetLocalEvent event, Emitter<EditState> emit) async {
     final dataState = await _getLocalUserUseCase();
 
-    print('loca');
-
     if (dataState is DataFailed) {
-       emit(EditFailedState(message: "Произошла ошибка при получении пользователя"));
+       emit(EditFailedState(message: AppStrings.userFetchError));
     }
 
     if(dataState is DataSuccess) {
@@ -67,12 +63,10 @@ class EditBloc extends Bloc<EditEvent, EditState> {
     _logger.log(Logger.level, dataState.data);
 
     if (dataState is DataFailed) {
-      _logger.log(Logger.level, "Failed");
-      emit(EditFailedState(message: "Не удалось удалить профиль"));
+      emit(EditFailedState(message: AppStrings.userDeleteFailed));
     }
     if (dataState is DataSuccess) {
-      _logger.log(Logger.level, "Success");
-      emit(EditSuccessState(message: 'Профиль удален'));
+      emit(EditSuccessState(message: AppStrings.userDeleteSuccess));
     }
   }
 
@@ -95,10 +89,9 @@ class EditBloc extends Bloc<EditEvent, EditState> {
   _onEditProfile(EditProfileEvent event, Emitter<EditState> emit) async {
     emit(EditLoadingState());
     if (isSelectedImage) {
-      print('123');
       final dataStateImage = await _sendImageServerUseCase(params: image!);
       if (dataStateImage is DataFailed) {
-        Fluttertoast.showToast(msg: 'При загрузке фото произошла ошибка');
+        Fluttertoast.showToast(msg: AppStrings.userPhotoUploadError);
       }
       if (dataStateImage is DataSuccess) {
         uploadedImage = dataStateImage.data!;
@@ -124,7 +117,7 @@ class EditBloc extends Bloc<EditEvent, EditState> {
 
     if (dataState is DataSuccess) {
       UserData.instance.currentUser = dataState.data;
-      emit(EditSuccessState(message: 'Профиль успешно обновлен'));
+      emit(EditSuccessState(message: AppStrings.userUpdated));
     }
   }
 }

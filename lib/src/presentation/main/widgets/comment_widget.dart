@@ -1,3 +1,4 @@
+import 'package:wrestling_hub/core/constants/app_strings.dart';
 import 'package:wrestling_hub/core/utils/wrestling_copy_clipboard.dart';
 import 'package:wrestling_hub/core/utils/wrestling_time_stamp.dart';
 import 'package:wrestling_hub/src/data/main/models/comment.dart';
@@ -33,7 +34,7 @@ class CommentWidget extends StatelessWidget {
             splashFactory: NoSplash.splashFactory,
             highlightColor: Colors.transparent,
             onLongPress: () {
-              CopyClipBoard().copy(comment.text!, 'Скопировано');
+              CopyClipBoard().copy(comment.text!, AppStrings.copied);
             },
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
@@ -42,21 +43,21 @@ class CommentWidget extends StatelessWidget {
               children: [
                 Padding(
                    padding: const EdgeInsets.only(left: 5.0, right: 10.0,top: 5),
-                   child: Text('${comment.text}',style: const TextStyle(fontWeight: FontWeight.normal, fontFamily: 'Crimson', fontSize: 16))
+                   child: Text('${comment.text}',style: Theme.of(context).textTheme.bodyMedium)
                  ),
-                  Padding(
-                      padding: const EdgeInsets.only(left: 5.0, right: 10.0,bottom: 5),
-                      child: Text(WrestlingTimeStamp.timeAgo(comment.creationDateTime.toString()),style: const TextStyle(color: Color(0xff7DA8D3),fontSize: 12))
-                  ),
-               ],
-              ),
+                Padding(
+                    padding: const EdgeInsets.only(left: 5.0, right: 10.0,bottom: 5),
+                    child: Text(WrestlingTimeStamp.timeAgo(comment.creationDateTime.toString()),style: const TextStyle(color: Color(0xff7DA8D3),fontSize: 12))
+                ),
+              ],
+            ),
           ),
         ),
       ) : InkWell(
         splashFactory: NoSplash.splashFactory,
         highlightColor: Colors.transparent,
         onLongPress: () {
-          CopyClipBoard().copy(comment.text!, 'Скопировано');
+          CopyClipBoard().copy(comment.text!, AppStrings.copied);
         },
         child: Container(
           margin: const EdgeInsets.all(6),
@@ -79,14 +80,14 @@ class CommentWidget extends StatelessWidget {
                         alignment: Alignment.centerLeft,
                         child: Padding(
                           padding: const EdgeInsets.only(left: 10.0, right: 10.0,top: 5),
-                          child: Text('${comment.firstName}',style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.amber, fontFamily: 'Crimson', fontSize: 14)),
+                          child: Text('${comment.firstName}',style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.amber, fontFamily: 'Open-Sans', fontSize: 14)),
                         ),
                       ),
                      Align(
                        alignment: Alignment.centerLeft,
                        child: Padding(
                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                         child: Text('${comment.text}',style: const TextStyle(fontWeight: FontWeight.normal, fontFamily: 'Crimson', fontSize: 16)),
+                         child: Text('${comment.text}',style: const TextStyle(fontWeight: FontWeight.normal, fontFamily: 'Open-Sans', fontSize: 16)),
                        ),
                      ),
                       Padding(

@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:wrestling_hub/core/constants/app_colors.dart';
+import 'package:wrestling_hub/core/constants/app_strings.dart';
 import 'package:wrestling_hub/core/constants/app_urls.dart';
 import 'package:wrestling_hub/src/presentation/auth/widgets/number_form_field.dart';
 
@@ -20,8 +21,8 @@ class ModalBottomAuth {
   show(BuildContext context) {
     final TextEditingController numberController = TextEditingController();
     Widget cancelButton = TextButton(
-      child: const Text("Закрыть", style: TextStyle(fontSize: 14,
-          fontFamily: 'Crimson',
+      child: const Text(AppStrings.close, style: TextStyle(fontSize: 14,
+          fontFamily: 'Open-Sans',
           color: AppColors.smallText,
           fontWeight: FontWeight.normal),),
       onPressed: () {
@@ -30,10 +31,11 @@ class ModalBottomAuth {
     );
 
     Widget sendButton = TextButton(
-      child: const Text("Авторизоваться", style: TextStyle(fontSize: 14,
-          fontFamily: 'Crimson',
+      child: const Text(AppStrings.userLogin, style: TextStyle(fontSize: 14,
+          fontFamily: 'Open-Sans',
           color: AppColors.smallText,
-          fontWeight: FontWeight.normal),),
+          fontWeight: FontWeight.normal),
+      ),
       onPressed: () {
         callback(numberController.text);
       }

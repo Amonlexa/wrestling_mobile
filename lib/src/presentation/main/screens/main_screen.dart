@@ -1,4 +1,5 @@
 import 'package:wrestling_hub/core/constants/app_colors.dart';
+import 'package:wrestling_hub/core/constants/app_strings.dart';
 import 'package:wrestling_hub/core/route/app_router.dart';
 import 'package:wrestling_hub/src/data/main/models/news.dart';
 import 'package:wrestling_hub/src/presentation/main/blocs/main/main_bloc.dart';
@@ -45,7 +46,7 @@ class _MainScreenState extends State<MainScreen>  {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text('Wrestling Hub',style: Theme.of(context).textTheme.titleLarge),
+        title: Text(AppStrings.appName,style: Theme.of(context).textTheme.titleLarge),
         centerTitle: true,
         actions: [
           IconButton(
@@ -83,7 +84,7 @@ class _MainScreenState extends State<MainScreen>  {
                           child: ErrorPage(
                             errorText: state.error,
                             icon: Icons.error_outline_sharp,
-                            buttonText: 'Повторить',
+                            buttonText: AppStrings.repeat,
                             onPress: () {
                               context.read<MainBloc>().page = 0;
                               context.read<MainBloc>().add(NewsFetchEvent());
@@ -107,7 +108,7 @@ class _MainScreenState extends State<MainScreen>  {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Лучшие подборки', style: Theme.of(context).textTheme.titleMedium,textAlign: TextAlign.center),
+                              Text(AppStrings.mainBestSelections, style: Theme.of(context).textTheme.titleMedium,textAlign: TextAlign.center),
                               const SizedBox(height: 10),
                               SingleChildScrollView(
                                 child: SizedBox(
@@ -126,7 +127,7 @@ class _MainScreenState extends State<MainScreen>  {
                                 ),
                               ),
                               const SizedBox(height: 10),
-                              Text('Полный список новостей', style: Theme.of(context).textTheme.titleMedium,textAlign: TextAlign.center),
+                              Text(AppStrings.mainFullNewsList, style: Theme.of(context).textTheme.titleMedium,textAlign: TextAlign.center),
                               const SizedBox(height: 10),
                               ListView.builder(
                                   shrinkWrap: true,
@@ -136,7 +137,7 @@ class _MainScreenState extends State<MainScreen>  {
                                   padding: EdgeInsets.zero,
                                   itemBuilder: (context, index) {
                                     if (index >= news.length) {
-                                      return Center(child: context.read<MainBloc>().isLastPage ? Text('Вы загрузили максимальное количество новостей', style: Theme.of(context).textTheme.titleMedium,textAlign: TextAlign.center,)
+                                      return Center(child: context.read<MainBloc>().isLastPage ? Text(AppStrings.mainMaxNewsLoaded, style: Theme.of(context).textTheme.titleMedium,textAlign: TextAlign.center,)
                                           : const WrestlingProgressBar());
                                     } else {
                                       return WrestlingNewsCard(
@@ -151,7 +152,7 @@ class _MainScreenState extends State<MainScreen>  {
                             ],
                           ),
                         );}
-                      return Center(child: Text('Упс. Что-то пошло не так', style: Theme.of(context).textTheme.titleMedium));
+                      return Center(child: Text(AppStrings.errorUnknown, style: Theme.of(context).textTheme.titleMedium));
                     },
                   ),
                 ),

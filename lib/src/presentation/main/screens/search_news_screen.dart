@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:wrestling_hub/core/constants/app_strings.dart';
 import 'package:wrestling_hub/core/route/app_router.dart';
 import 'package:wrestling_hub/src/data/main/models/news.dart';
 import 'package:wrestling_hub/src/presentation/main/blocs/news_search/search_news_bloc.dart';
@@ -59,7 +60,7 @@ class _SearchNewsScreen extends State<SearchNewsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Результаты", style: Theme.of(context).textTheme.titleMedium),
+        title: Text(AppStrings.searchNewsTitle, style: Theme.of(context).textTheme.titleMedium),
         centerTitle: true,
       ),
       body: Center(
@@ -79,7 +80,7 @@ class _SearchNewsScreen extends State<SearchNewsScreen> {
                      return const Center(child:  WrestlingProgressBar());
                    }
                    if(state is SearchNewsEmptyState) {
-                     return Center(child: Text('Результаты по вашему поиску не найдено', style: Theme.of(context).textTheme.titleMedium));
+                     return Center(child: Text(AppStrings.searchNewsEmptyResult, style: Theme.of(context).textTheme.titleMedium));
                    }
                    if (state is SearchNewsSuccessState) {
                      final news = state.news;
@@ -92,7 +93,7 @@ class _SearchNewsScreen extends State<SearchNewsScreen> {
                          padding: EdgeInsets.zero,
                          itemBuilder: (context, index) {
                            if (index >= news.length) {
-                             return Center(child: context.read<SearchNewsBloc>().isLastPage ? Text('Вы загрузили максимальное количество новостей', style: Theme.of(context).textTheme.titleMedium, textAlign: TextAlign.center,)
+                             return Center(child: context.read<SearchNewsBloc>().isLastPage ? Text(AppStrings.mainMaxNewsLoaded, style: Theme.of(context).textTheme.titleMedium, textAlign: TextAlign.center,)
                                  : const WrestlingProgressBar());
                            } else {
                              return WrestlingNewsCard(news: news[index], onPressed: (News value) {
@@ -106,7 +107,7 @@ class _SearchNewsScreen extends State<SearchNewsScreen> {
                    if (state is SearchNewsErrorState) {
                      return Center(child: Text(state.error, style: Theme.of(context).textTheme.titleMedium));
                    }
-                   return Center(child: Text('Упс. Что-то пошло не так', style: Theme.of(context).textTheme.titleMedium));
+                   return Center(child: Text(AppStrings.errorUnknown, style: Theme.of(context).textTheme.titleMedium));
                   }
                 ),
               ),

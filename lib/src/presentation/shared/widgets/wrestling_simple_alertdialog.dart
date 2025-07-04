@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wrestling_hub/core/constants/app_colors.dart';
 import 'package:wrestling_hub/core/constants/app_config.dart';
+import 'package:wrestling_hub/core/constants/app_strings.dart';
 
 class WrestlingSimpleAlertDialog extends StatelessWidget {
 
@@ -29,11 +30,11 @@ class WrestlingSimpleAlertDialog extends StatelessWidget {
     // set up the buttons
     Widget cancelButton = TextButton(
       onPressed: onNoButton,
-      child: Text("Нет",style: Theme.of(context).textTheme.titleSmall),
+      child: Text(AppStrings.no,style: Theme.of(context).textTheme.titleSmall),
     );
     Widget yesButton = TextButton(
       onPressed: onYesButton,
-      child: Text("Да",style: Theme.of(context).textTheme.titleSmall),
+      child: Text(AppStrings.yes,style: Theme.of(context).textTheme.titleSmall),
     );
 
     // set up the AlertDialog

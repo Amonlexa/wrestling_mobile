@@ -1,5 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:wrestling_hub/core/constants/app_strings.dart';
 
 class CopyClipBoard {
 
@@ -9,7 +10,7 @@ class CopyClipBoard {
       await Clipboard.setData(ClipboardData(text: copy));
       showToast(message);
     }catch(e) {
-      showToast("Что то пошло не так${e.toString()}");
+      showToast("${AppStrings.errorUnknown}${e.toString()}");
     }
   }
 

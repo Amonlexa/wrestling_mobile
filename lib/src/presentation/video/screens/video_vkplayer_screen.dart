@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:wrestling_hub/core/constants/app_strings.dart';
 import 'package:wrestling_hub/core/services/vk_video/src/utils/controllers/vk_video_controller.dart';
 import 'package:wrestling_hub/core/services/vk_video/vk_video.dart';
 import 'package:wrestling_hub/src/data/video/models/video.dart';
@@ -39,18 +40,16 @@ class _VideoVkPlayerScreen extends State<VideoVkPlayerScreen>{
       oid = match.group(1)!; // Данные после "video-" до "_"
       id = match.group(2)!; // Цифры после "_"
 
-      print(oid);
-      print(id);
 
     } else {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         WrestlingInfoAlertdialog(
-            title: 'Ошибка',
+            title: AppStrings.errorUnknown,
             onClose: () {
               GoRouter.of(context).pop();
               GoRouter.of(context).pop();
             },
-            contentWidget: Text("Произошла ошибка при загрузке видео",style: Theme.of(context).textTheme.titleMedium,textAlign: TextAlign.center)
+            contentWidget: Text(AppStrings.videosLoadError,style: Theme.of(context).textTheme.titleMedium,textAlign: TextAlign.center)
         ).showAlertDialog(context);
       });
     }
@@ -79,7 +78,7 @@ class _VideoVkPlayerScreen extends State<VideoVkPlayerScreen>{
             videoResolutionEnum: VideoResolutionEnum.p1080,
             backgroundColor: const Color(0xFF000000),
             initialWidget: const Text(
-              "Загрузка....",
+              AppStrings.loading,
               style: TextStyle(
                 color: Color(0xFFFFFFFF),
               ),

@@ -2,26 +2,20 @@ import 'package:wrestling_hub/core/resources/data_state.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
 import 'package:meta/meta.dart';
 import 'package:wrestling_hub/src/data/user/models/user.dart';
 import 'package:wrestling_hub/src/data/user/data_source/local/user_data.dart';
 import 'package:wrestling_hub/src/domain/user/usecases/get_local_user_usecase.dart';
-
-
-
 part 'profile_event.dart';
 part 'profile_state.dart';
 
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
-  final Logger _logger;
   final GetLocalUserUseCase _getLocalUserUseCase;
   final UserData _userData;
 
 
   ProfileBloc(
       this._getLocalUserUseCase,
-      this._logger,
       this._userData,
       ) : super(ProfileInitial()) {
     on<ProfileGetLocalEvent>(_onGetLocalUser);
@@ -56,10 +50,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     if(status == '3') {
       return const Icon(Icons.visibility_outlined,color: Colors.red);
     }
-
-
     return const Icon(Icons.verified,color: Colors.blueGrey);
-
   }
 
 }

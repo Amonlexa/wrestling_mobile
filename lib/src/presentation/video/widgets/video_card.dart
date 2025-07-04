@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:wrestling_hub/core/constants/app_colors.dart';
+import 'package:wrestling_hub/core/constants/app_strings.dart';
 import 'package:wrestling_hub/core/constants/app_urls.dart';
 import 'package:wrestling_hub/core/route/app_router.dart';
 import 'package:wrestling_hub/core/utils/wrestling_copy_clipboard.dart';
@@ -84,31 +85,31 @@ class VideoCard extends StatelessWidget {
                       ),
                       PopupMenuButton(
                         icon: const Icon(Icons.more_vert_rounded,color: Colors.white),
-                        color: Colors.black,
+                        color: Colors.white,
                         itemBuilder: (context) => [
                           PopupMenuItem(
                               onTap: () async {
                                 await launchUrl(Uri.parse(video.urlVideo.toString()), mode: LaunchMode.externalApplication);
                               },
-                              child:Text('Посмотреть ВК Видео',style: Theme.of(context).textTheme.labelSmall)
+                              child:Text(AppStrings.videosWatchVkVideo,style: Theme.of(context).textTheme.labelSmall)
                           ),
                           PopupMenuItem(
                               onTap: () {
-                                  CopyClipBoard().copy(video.urlVideo.toString(), "Ссылка скопировано");
+                                  CopyClipBoard().copy(video.urlVideo.toString(), AppStrings.copied);
                               },
-                              child:Text('Скопировать ссылку',style: Theme.of(context).textTheme.labelSmall)
+                              child:Text(AppStrings.copyLink,style: Theme.of(context).textTheme.labelSmall)
                           ),
                           PopupMenuItem(
                               onTap: ()  {
                                 GoRouter.of(context).push(AppRoute.vkVideoInfo);
                               },
-                              child:Text('Нашли свое видео ?',style: Theme.of(context).textTheme.labelSmall)
+                              child:Text(AppStrings.videosFoundYourVideo,style: Theme.of(context).textTheme.labelSmall)
                           ),
                           PopupMenuItem(
                               onTap: () async {
                                 await Share.share('${ video.name}\nссылка: ${ video.urlVideo}\nСкачать мобильное приложение\nIOS: ${AppUrls.appStore}\nAndroid:  ${AppUrls.googlePlay}');
                               },
-                              child:Text('Поделиться',style: Theme.of(context).textTheme.labelSmall)
+                              child:Text(AppStrings.videosShare,style: Theme.of(context).textTheme.labelSmall)
                           ),
                         ],
                       ),

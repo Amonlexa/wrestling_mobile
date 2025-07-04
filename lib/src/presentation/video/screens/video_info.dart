@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wrestling_hub/core/constants/app_colors.dart';
+import 'package:wrestling_hub/core/constants/app_resource.dart';
+import 'package:wrestling_hub/core/constants/app_strings.dart';
 import 'package:wrestling_hub/src/presentation/shared/widgets/modal_bottom_feedback.dart';
 import 'package:wrestling_hub/src/presentation/shared/widgets/show_image.dart';
 import 'package:wrestling_hub/src/presentation/shared/widgets/wrestling_button.dart';
@@ -13,7 +14,7 @@ class VideoInfoScreen extends StatelessWidget {
       return Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text('VK Video', style: Theme.of(context).textTheme.titleLarge),
+          title: Text(AppStrings.videosVKTitle, style: Theme.of(context).textTheme.titleLarge),
         ),
         body:  Padding(
           padding: const EdgeInsets.all(16.0),
@@ -22,7 +23,7 @@ class VideoInfoScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               spacing: 10,
               children: [
-                const ShowImage(image: 'https://www.sostav.ru/images/news/2021/10/15/nlmb6mfz_md.png', width: double.infinity,height: 200, circular: 30,isCard: true),
+                const ShowImage(image: AppResources.iconVkVideo, width: double.infinity,height: 200, circular: 30,isCard: true),
                 const Text(
                   'Использование технологии VK для показа видео',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -48,7 +49,7 @@ class VideoInfoScreen extends StatelessWidget {
                   style: TextStyle(fontSize: 16),
                 ),
                 AppButton(
-                    title:'Написать в поддержку',
+                    title: AppStrings.techSupport,
                     onPressed: () async {
                       ModalBottomFeedback().show(context);
                     }

@@ -2,13 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:wrestling_hub/core/constants/app_colors.dart';
+import 'package:wrestling_hub/core/constants/app_strings.dart';
 import 'package:wrestling_hub/core/constants/app_text_styles.dart';
 import 'package:wrestling_hub/core/constants/app_urls.dart';
 
 class DonatWidget extends StatelessWidget {
   const DonatWidget({super.key});
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -26,12 +25,12 @@ class DonatWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Поддержать разработчика',
+              AppStrings.donatTitle,
                style: Theme.of(context).textTheme.titleMedium
             ),
             const SizedBox(height: 5),
             Text(
-              'Помогите нам улучшать приложение чаще! Ваш донат напрямую будет способствовать разработке новых функций, исправлению ошибок и общему усовершенствованию приложения Wrestling Hub.',
+              AppStrings.donatDescription,
               style: Theme.of(context).textTheme.bodyMedium,
             ),
             const SizedBox(height: 5),

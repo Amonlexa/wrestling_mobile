@@ -1,3 +1,4 @@
+import 'package:wrestling_hub/core/constants/app_strings.dart';
 import 'package:wrestling_hub/src/presentation/favorites/blocs/favorite_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,14 +32,14 @@ class _FavoritesScreenState extends State<FavoritesScreen> with TickerProviderSt
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Сохраненное', style: Theme.of(context).textTheme.titleLarge),
+        title: Text(AppStrings.favTitle, style: Theme.of(context).textTheme.titleLarge),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(50.0),
           child:  WrestlingTabBar(
             controller: _controllerTab,
             tabs: const [
-              Tab(text: 'Новости'),
-              Tab(text: 'Видео'),
+              Tab(text: AppStrings.favNews),
+              Tab(text: AppStrings.favVideos),
             ],
           ),
         ),

@@ -19,7 +19,7 @@ class SignInWidget extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         elevation: 2,
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        minimumSize: const Size(double.infinity, 45), // ← можно задать высоту явно
+        minimumSize: const Size(double.infinity, 45),
       ),
       onPressed: () async {
         return onPressed();

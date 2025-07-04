@@ -1,3 +1,5 @@
+import 'package:wrestling_hub/core/constants/app_config.dart';
+import 'package:wrestling_hub/core/constants/app_strings.dart';
 import 'package:wrestling_hub/core/constants/app_urls.dart';
 import 'package:wrestling_hub/core/route/app_router.dart';
 import 'package:wrestling_hub/src/presentation/profile/widgets/donat_widget.dart';
@@ -42,7 +44,7 @@ class _ProfileScreen extends State<ProfileScreen> {
             child: Scaffold(
               appBar: AppBar(
                 centerTitle: true,
-                title: Text('Профиль', style: Theme.of(context).textTheme.titleLarge),
+                title: Text(AppStrings.userProfileTitle, style: Theme.of(context).textTheme.titleLarge),
                 actions: [
                   PopupMenuButton(
                     icon: const Icon(CupertinoIcons.settings),
@@ -51,11 +53,11 @@ class _ProfileScreen extends State<ProfileScreen> {
                       if (state is ProfileLoggedState)
                         PopupMenuItem(
                           onTap: () => _showLogoutDialog(context),
-                          child: Text('Выйти из аккаунта', style: Theme.of(context).textTheme.titleSmall),
+                          child: Text(AppStrings.logout, style: Theme.of(context).textTheme.titleSmall),
                         ),
                       PopupMenuItem(
                         onTap: () => _showVersionDialog(context),
-                        child: Text('Версия приложения', style: Theme.of(context).textTheme.titleSmall),
+                        child: Text(AppStrings.versionApp, style: Theme.of(context).textTheme.titleSmall),
                       ),
                     ],
                   )
@@ -73,10 +75,10 @@ class _ProfileScreen extends State<ProfileScreen> {
                       if (state is ProfileLoggedState) ...[
                         ProfileWidget(avatar: state.user.avatars, width: 90, height: 90),
                         Text(state.user.getInitials(), style: Theme.of(context).textTheme.titleLarge),
-                        Text('Дата регистрации: ${state.user.creationDateTime}', style: Theme.of(context).textTheme.titleSmall),
+                        Text('${AppStrings.userRegistrationDate}${state.user.creationDateTime}', style: Theme.of(context).textTheme.titleSmall),
                         Row(
                           children: [
-                            Text('Статус:', style: Theme.of(context).textTheme.titleSmall),
+                            Text(AppStrings.userStatus, style: Theme.of(context).textTheme.titleSmall),
                             const SizedBox(width: 10),
                             InkWell(
                               onTap: () => _showStatusInfoDialog(context),
@@ -86,7 +88,7 @@ class _ProfileScreen extends State<ProfileScreen> {
                         ),
                       ],
                       AppButton(
-                        title: state is ProfileLoggedState ? 'Редактировать профиль' : 'Войти в профиль',
+                        title: state is ProfileLoggedState ? AppStrings.userChange : AppStrings.userLogin,
                         onPressed: () {
                           if (state is ProfileLoggedState) {
                             GoRouter.of(context).pushNamed(AppRoute.profileEdit).then((val) {
@@ -105,28 +107,28 @@ class _ProfileScreen extends State<ProfileScreen> {
                       ),
                       const DonatWidget(),
                       ProfileMenuItem(
-                        title: 'Политика конфиденциальности',
+                        title: AppStrings.privacyPolicy,
                         icon: CupertinoIcons.doc_append,
                         endIcon: true,
                         onPress: () => launchUrl(Uri.parse(AppUrls.privacy)),
                       ),
                       ProfileMenuItem(
-                        title: 'Поделиться с друзьями',
+                        title: AppStrings.shareApp,
                         icon: CupertinoIcons.share,
                         endIcon: false,
                         onPress: () async => await Share.share(
-                          'Установите мобильное приложение Amonlexa Wrestling Hub ${AppUrls.storeApp}',
+                          '${AppStrings.shareAppMessage} ${AppUrls.storeApp}',
                         ),
                       ),
                       ProfileMenuItem(
-                        title: 'Оценить приложение',
+                        title: AppStrings.rateApp,
                         icon: CupertinoIcons.star,
                         endIcon: false,
                         onPress: () => launchUrl(Uri.parse(AppUrls.storeApp)),
                       ),
-                      Text('Обратная связь', style: Theme.of(context).textTheme.titleLarge),
+                      Text(AppStrings.feedback, style: Theme.of(context).textTheme.titleLarge),
                       ProfileMenuItem(
-                        title: 'Наши контакты',
+                        title: AppStrings.ourContacts,
                         icon: CupertinoIcons.star,
                         endIcon: false,
                         onPress: () => ModalBottomFeedback().show(context),

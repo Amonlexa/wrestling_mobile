@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:wrestling_hub/core/constants/app_strings.dart';
 import 'package:wrestling_hub/core/route/app_router.dart';
 import 'package:wrestling_hub/src/data/main/models/news.dart';
 import 'package:wrestling_hub/src/presentation/main/widgets/wrestling_news_card.dart';
@@ -34,7 +35,7 @@ class FavoritesNewsCarousel extends StatelessWidget {
           alignment: Alignment.center,
           height: MediaQuery.of(context).size.height / 1.5,
           child:
-          Text('У вас нет избранных новостей', style: Theme.of(context).textTheme.bodyMedium, textAlign: TextAlign.center),
+          Text(AppStrings.favEmptyNews, style: Theme.of(context).textTheme.bodyMedium, textAlign: TextAlign.center),
         ),
       ),
     );

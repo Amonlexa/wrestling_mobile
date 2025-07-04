@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
+import 'package:wrestling_hub/core/constants/app_strings.dart';
 import 'package:wrestling_hub/core/utils/wrestling_snackbar.dart';
 import 'package:wrestling_hub/src/presentation/shared/widgets/modal_bottom_image_picker.dart';
 import 'package:wrestling_hub/src/presentation/shared/widgets/show_image.dart';
@@ -25,8 +26,6 @@ class ProfileEditScreen extends StatelessWidget {
     firstNameController.text = fn;
     patronymicController.text = pt;
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +88,7 @@ class ProfileEditScreen extends StatelessWidget {
                        Padding(
                          padding: const EdgeInsets.all(12.0),
                          child: AppButton(
-                             title: 'Выбрать фото',
+                             title: AppStrings.selectPhoto,
                              onPressed: () {
                                ModalBottomImagePicker(
                                    onPressCamera: () {
@@ -107,7 +106,7 @@ class ProfileEditScreen extends StatelessWidget {
                        Column(
                          crossAxisAlignment: CrossAxisAlignment.start,
                          children: [
-                           Text('Фамилия',style: Theme.of(context).textTheme.labelSmall),
+                           Text(AppStrings.userLastName,style: Theme.of(context).textTheme.labelSmall),
                            WrestlingFormField(
                                controller: lastNameController,
                                inputType: TextInputType.name,
@@ -115,7 +114,7 @@ class ProfileEditScreen extends StatelessWidget {
                                onChanged: (val) {}
                            ),
                            const SizedBox(height: 12),
-                           Text('Имя',style: Theme.of(context).textTheme.labelSmall),
+                           Text(AppStrings.userFirstName,style: Theme.of(context).textTheme.labelSmall),
                            const SizedBox(height: 5),
                            WrestlingFormField(
                                controller: firstNameController,
@@ -124,7 +123,7 @@ class ProfileEditScreen extends StatelessWidget {
                                onChanged: (val) {}
                            ),
                            const SizedBox(height: 12),
-                           Text('Отчество',style: Theme.of(context).textTheme.labelSmall),
+                           Text(AppStrings.userPatronymic,style: Theme.of(context).textTheme.labelSmall),
                            const SizedBox(height: 5),
                            WrestlingFormField(
                                controller: patronymicController,
@@ -138,8 +137,8 @@ class ProfileEditScreen extends StatelessWidget {
                          child: TextButton(
                              onPressed: () {
                                WrestlingSimpleAlertDialog(
-                                 title: 'Вы точно хотите удалить аккаунт ?',
-                                 description: 'При удаление аккаунта ваши данные будут храниться до 90 дней потом восстановить возможности не будет.',
+                                 title: AppStrings.userConfirmAccountDeletion,
+                                 description: AppStrings.userAccountDeletionWarning,
                                  onYesButton: () {
                                    context.read<EditBloc>().add(EditDeleteProfileEvent(context));
                                  },
@@ -148,16 +147,16 @@ class ProfileEditScreen extends StatelessWidget {
                                  },
                                ).showAlertDialog(context);
                              },
-                             child: const Text('Удалить аккаунт',style: TextStyle(fontSize: 13,color: Colors.red,fontWeight: FontWeight.bold))
+                             child: const Text(AppStrings.userDeleteAccount,style: TextStyle(fontSize: 13,color: Colors.red,fontWeight: FontWeight.bold))
                          ),
                        ),
                        Padding(
                          padding: const EdgeInsets.symmetric(vertical: 6.0),
                          child: AppButton(
-                             title: 'Сохранить',
+                             title: AppStrings.confirm,
                              onPressed: () {
                                if(firstNameController.text.isEmpty || lastNameController.text.isEmpty || patronymicController.text.isEmpty) {
-                                 Fluttertoast.showToast(msg: 'Пожалуйста заполните все поля');
+                                 Fluttertoast.showToast(msg: AppStrings.userPleaseFillAllFields);
                                }else{
                                  context.read<EditBloc>().add(EditProfileEvent(firstNameController.text, lastNameController.text, patronymicController.text));
                                }

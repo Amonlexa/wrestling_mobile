@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wrestling_hub/core/constants/app_colors.dart';
+import 'package:wrestling_hub/core/constants/app_strings.dart';
 import 'package:wrestling_hub/core/route/app_router.dart';
 import 'package:wrestling_hub/src/presentation/shared/widgets/error_page.dart';
 import 'package:wrestling_hub/src/presentation/shared/widgets/wrestling_progress_bar.dart';
@@ -21,19 +22,19 @@ class VideosScreen extends StatefulWidget {
 
 class _VideosScreen extends State<VideosScreen> with TickerProviderStateMixin{
 
-  TabController? _controller_tab;
+  TabController? _controllerTab;
 
 
   @override
   void initState() {
     context.read<VideosCubit>().onGetVideos(false);
-    _controller_tab = TabController(vsync: this, length: 0);
+    _controllerTab = TabController(vsync: this, length: 0);
     super.initState();
   }
 
   @override
   void dispose() {
-    _controller_tab?.dispose();
+    _controllerTab?.dispose();
     super.dispose();
   }
 
@@ -42,14 +43,9 @@ class _VideosScreen extends State<VideosScreen> with TickerProviderStateMixin{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {
-      //     Navigator.push(context, MaterialPageRoute(builder: (context) => const VideoTestScreen()));
-      //   },
-      // ),
       appBar: AppBar(
         centerTitle: true,
-        title: Text('WH Видео', style: Theme.of(context).textTheme.titleLarge),
+        title: Text(AppStrings.videosWHTitle, style: Theme.of(context).textTheme.titleLarge),
         bottom: PreferredSize(
          preferredSize: const Size.fromHeight(50.0),
           child: BlocListener<VideosCubit, VideosState> (
@@ -57,7 +53,7 @@ class _VideosScreen extends State<VideosScreen> with TickerProviderStateMixin{
             listener: (BuildContext context, VideosState state) {
               if(state is VideosSuccessState) {
                 if(!state.isRefresh) {
-                  _controller_tab = TabController(length: state.tabs.length, vsync: this);
+                  _controllerTab = TabController(length: state.tabs.length, vsync: this);
                 }
               }
             },
@@ -67,7 +63,7 @@ class _VideosScreen extends State<VideosScreen> with TickerProviderStateMixin{
                   return const Center(child: WrestlingProgressBar());
                 } else if (state is VideosSuccessState) {
                   return WrestlingTabBar(
-                    controller: _controller_tab,
+                    controller: _controllerTab,
                     tabs: state.tabs,
                   );
                 }
@@ -93,7 +89,7 @@ class _VideosScreen extends State<VideosScreen> with TickerProviderStateMixin{
             if (state is VideosFailureState) {
               return ErrorPage(
                   errorText: state.message,
-                  buttonText: 'Повторить',
+                  buttonText: AppStrings.repeat,
                   onPress: () {
                     context.read<VideosCubit>().onGetVideos(false);
                   },
@@ -105,7 +101,7 @@ class _VideosScreen extends State<VideosScreen> with TickerProviderStateMixin{
             }
             if (state is VideosSuccessState) {
               return TabBarView(
-                controller: _controller_tab,
+                controller: _controllerTab,
                 children: state.pages.map((page) {
                   return RefreshIndicator(
                     color: AppColors.accent,

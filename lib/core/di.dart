@@ -71,8 +71,8 @@ Future<void> initializeDependencies() async {
   Hive.registerAdapter(VideoAdapter());
   final boxNews = await Hive.openBox<News>(AppHiveBoxes.boxNews);
   final boxVideos = await Hive.openBox<Video>(AppHiveBoxes.boxVideos);
-  UserData userData = UserData.instance;
-  await userData.initStorage();
+  UserData spUser = UserData.instance;
+  await spUser.initStorage();
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -92,9 +92,9 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<MainDataSource>(MainDataSource(sl()));
   sl.registerSingleton<MainLocalDataSource>(MainLocalDataSource(boxNews));
   sl.registerSingleton<MainRepository>(MainRepositoryImpl(sl(), sl(),sl()));
-  sl.registerSingleton<UserLocalDataSource>(UserLocalDataSource(userData));
+  sl.registerSingleton<UserLocalDataSource>(UserLocalDataSource(spUser));
   sl.registerSingleton<UserApiDataSource>(UserApiDataSource(sl()));
-  sl.registerSingleton<UserRepository>(UserRepositoryImpl(sl(), sl(),sl(),userData,sl()));
+  sl.registerSingleton<UserRepository>(UserRepositoryImpl(sl(), sl(),sl(),spUser,sl()));
   sl.registerSingleton<VideoRemoteDataSource>(VideoRemoteDataSource(sl()));
   sl.registerSingleton<VideoLocalDataSource>(VideoLocalDataSource(boxVideos));
   sl.registerSingleton<VideoRepository>(VideoRepositoryImpl(sl(),sl(),sl()));
@@ -126,20 +126,20 @@ Future<void> initializeDependencies() async {
 
 
   //services
-  sl.registerSingleton<FirebaseService>(FirebaseService(sl(),userData));
+  sl.registerSingleton<FirebaseService>(FirebaseService(sl(),spUser));
 
   // Blocs
   sl.registerFactory<ButtonCubit>(() => ButtonCubit());
   sl.registerFactory<MainBloc>(() => MainBloc(sl(), sl(),sl()));
   sl.registerFactory<DetailsNewsBloc>(() => DetailsNewsBloc(sl(), sl(),sl(),sl(),sl()));
   sl.registerFactory<SearchNewsBloc>(() => SearchNewsBloc(sl(), sl()));
-  sl.registerFactory<NewsCommentBloc>(() => NewsCommentBloc(sl(),sl(),sl(),userData));
+  sl.registerFactory<NewsCommentBloc>(() => NewsCommentBloc(sl(),sl(),sl(),spUser));
   sl.registerFactory<AuthBloc>(() => AuthBloc(sl()));
   sl.registerFactory<SignInCubit>(() => SignInCubit(sl(),sl()));
-  sl.registerFactory<ProfileBloc>(() => ProfileBloc(sl(),sl(),userData));
+  sl.registerFactory<ProfileBloc>(() => ProfileBloc(sl(),spUser));
   sl.registerFactory<FavoriteBloc>(() => FavoriteBloc(sl(),sl()));
-  sl.registerFactory<SplashBloc>(() => SplashBloc(sl(),sl(),userData));
-  sl.registerFactory<EditBloc>(() => EditBloc(sl(),sl(),sl(),sl(),sl(),userData));
+  sl.registerFactory<SplashBloc>(() => SplashBloc(sl(),sl(),spUser));
+  sl.registerFactory<EditBloc>(() => EditBloc(sl(),sl(),sl(),sl(),sl(),spUser));
   sl.registerFactory<VideosCubit>(() => VideosCubit(sl(),sl()));
   sl.registerFactory<VideoFavoriteCubit>(() => VideoFavoriteCubit(sl(),sl(),sl()));
 
