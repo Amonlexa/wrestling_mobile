@@ -4,6 +4,9 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'core/wrestling_hub_app.dart';
 import 'core/di.dart';
 
+final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
+final GlobalKey<NavigatorState> sectionANavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'sectionANav');
+
 void main() async {
   await dotenv.load(fileName: '.env');
   WidgetsFlutterBinding.ensureInitialized();

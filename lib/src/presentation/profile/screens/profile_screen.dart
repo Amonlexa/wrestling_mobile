@@ -97,7 +97,10 @@ class _ProfileScreen extends State<ProfileScreen> {
                               }
                             });
                           } else {
-                            GoRouter.of(context).pushNamed(AppRoute.auth).then((val) {
+                            GoRouter.of(context).pushNamed(
+                                AppRoute.authName,
+                                pathParameters: {'from' : AppRoute.profile}
+                            ).then((val) {
                               if (val == 'auth' && context.mounted) {
                                 context.read<ProfileBloc>().add(ProfileGetLocalEvent());
                               }

@@ -12,13 +12,14 @@ import 'package:wrestling_hub/src/presentation/auth/blocs/sign_in/sign_in_state.
 import 'package:wrestling_hub/src/presentation/auth/widgets/privacy_policy_text_widget.dart';
 import 'package:wrestling_hub/src/presentation/auth/widgets/sign_in_widget.dart';
 import 'package:wrestling_hub/src/presentation/auth/widgets/number_form_field.dart';
-import 'package:wrestling_hub/src/presentation/shared/widgets/app_logo_widget.dart';
 import 'package:wrestling_hub/src/presentation/shared/widgets/dissmissible_keyboard_widget.dart';
 import 'package:wrestling_hub/src/presentation/shared/widgets/wrestling_button.dart';
 
 class SignInScreen extends StatefulWidget {
 
-  const SignInScreen({super.key});
+  final String from;
+
+  const SignInScreen({super.key, required this.from});
 
   @override
   State<StatefulWidget> createState() => _SignInScreen();
@@ -30,6 +31,11 @@ class _SignInScreen extends State<SignInScreen>{
   final TextEditingController numberController = TextEditingController(text: '+ 7');
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocConsumer<SignInCubit, SignInState>(
       listener: (context, state) {
@@ -37,7 +43,7 @@ class _SignInScreen extends State<SignInScreen>{
           Fluttertoast.showToast(msg: state.message);
         }
         if(state is SignInGoogleLoggedState) {
-
+          GoRouter.of(context).goNamed(widget.from);
         }
       },
       builder: (context, state) {
@@ -83,7 +89,8 @@ class _SignInScreen extends State<SignInScreen>{
                         GoRouter.of(context).pushNamed(
                           AppRoute.sms,
                           pathParameters: {
-                            'number': numberController.text.toString()
+                            'number': numberController.text.toString(),
+                            'from' : widget.from
                           },
                         );
                       },

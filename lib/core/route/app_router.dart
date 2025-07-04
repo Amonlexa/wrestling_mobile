@@ -5,7 +5,8 @@ class AppRoute {
   //auth
   static const onboard = '/onboard';
   static const splash = '/splash';
-  static const auth = '/auth';
+  static const authName = '/auth';
+  static const authPath = '/auth/:from';
   static const sms = '/sms';
   //main
   static const main = '/main';

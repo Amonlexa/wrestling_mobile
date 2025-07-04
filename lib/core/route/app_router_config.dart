@@ -1,3 +1,4 @@
+import 'package:wrestling_hub/main.dart';
 import 'package:wrestling_hub/src/data/main/models/news.dart';
 import 'package:wrestling_hub/src/data/video/models/video.dart';
 import 'package:wrestling_hub/src/presentation/auth/screens/confirm_code_screen.dart';
@@ -22,7 +23,8 @@ import 'app_router.dart';
 class AppRouterConfig {
 
   final GoRouter router = GoRouter(
-      routes: [
+    navigatorKey: rootNavigatorKey,
+    routes: [
         GoRoute(
             path: AppRoute.root,
             name: AppRoute.root,
@@ -31,16 +33,21 @@ class AppRouterConfig {
             }
         ),
         GoRoute(
-            path: AppRoute.auth,
-            name: AppRoute.auth,
-            builder: (BuildContext context,state) => const SignInScreen()
+            path: AppRoute.authPath,
+            name: AppRoute.authName,
+            builder: (BuildContext context,state) {
+              return SignInScreen(
+                from: state.pathParameters['from']!,
+              );
+            }
         ),
         GoRoute(
-          path: '/sms/:number',
+          path: '/sms/:number/:from',
           name: AppRoute.sms,
           builder: (context, state)  {
             return ConfirmOtpCode(
               numberPhone: state.pathParameters['number'].toString(),
+              from: state.pathParameters['from'].toString(),
             );
           },
         ),
@@ -63,7 +70,7 @@ class AppRouterConfig {
                   name: AppRoute.main,
                   builder: (context, state) => const MainScreen(),
                 ),
-              ]
+              ],
             ),
             StatefulShellBranch(
                 routes: [
@@ -84,6 +91,7 @@ class AppRouterConfig {
                 ]
             ),
             StatefulShellBranch(
+              navigatorKey: sectionANavigatorKey,
                 routes: [
                   GoRoute(
                     path: AppRoute.profile,
