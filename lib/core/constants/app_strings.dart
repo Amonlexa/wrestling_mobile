@@ -34,6 +34,7 @@ class AppStrings {
   static const String errorRegisterToken = "Ошибка регистрации токена";
   static const String errorUnknown = "Что то пошло не так";
   static const String searchTextEmpty = "Поле поиска не должен быть пустым";
+  static const String errorLoadingImage = "Произошла ошибка при загрузке изображения";
 
   //sign in
   static const String authTitle = 'Авторизация';

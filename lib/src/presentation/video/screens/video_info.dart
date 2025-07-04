@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:wrestling_hub/core/constants/app_resource.dart';
 import 'package:wrestling_hub/core/constants/app_strings.dart';
 import 'package:wrestling_hub/src/presentation/shared/widgets/modal_bottom_feedback.dart';
-import 'package:wrestling_hub/src/presentation/shared/widgets/show_image.dart';
 import 'package:wrestling_hub/src/presentation/shared/widgets/wrestling_button.dart';
 
 class VideoInfoScreen extends StatelessWidget {
@@ -23,7 +22,9 @@ class VideoInfoScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               spacing: 10,
               children: [
-                const ShowImage(image: AppResources.iconVkVideo, width: double.infinity,height: 200, circular: 30,isCard: true),
+                Center(
+                    child: Image.asset(AppResources.iconVkVideo, height: 150, width: 150,alignment: Alignment.center)
+                ),
                 const Text(
                   'Использование технологии VK для показа видео',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),

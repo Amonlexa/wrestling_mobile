@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:wrestling_hub/core/constants/app_colors.dart';
 import 'package:wrestling_hub/core/constants/app_resource.dart';
+import 'package:wrestling_hub/core/constants/app_strings.dart';
 import 'package:wrestling_hub/src/presentation/shared/widgets/wrestling_progress_bar.dart';
 
 
@@ -41,21 +42,28 @@ class ShowImage extends StatelessWidget {
           ),
         ),
         placeholder: (context, url) => const WrestlingProgressBar(),
-        errorWidget: (context, url, error) => Icon(Icons.error, size: height, color: AppColors.accent),
+        errorWidget: (context, url, error) => errorImage(context)
       ),
     );
   }
 
-  Widget errorImage() {
+  Widget errorImage(BuildContext context) {
     return Container(
       height: height,
       decoration: BoxDecoration(
-          shape: BoxShape.rectangle,
-          borderRadius: BorderRadius.circular(circular),
-          image: const DecorationImage(
-              image: AssetImage(AppResources.logoApp),
-              fit: BoxFit.cover
-          )
+        shape: BoxShape.rectangle,
+        color: AppColors.bottomNav,
+        borderRadius: BorderRadius.circular(circular),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Image.asset(AppResources.logoApp, height: 80, width: 80),
+          ),
+          const Text(AppStrings.errorLoadingImage,textAlign: TextAlign.center)
+        ],
       ),
     );
   }
