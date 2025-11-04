@@ -10,9 +10,8 @@ class InitMainState extends NewsState {}
 class MainLoadingState extends NewsState {}
 
 class MainLoadedState extends NewsState {
-  final List<News>? topNewsHeadlines;
   final List<News> news;
-  MainLoadedState({required this.news,required this.topNewsHeadlines});
+  MainLoadedState({required this.news});
 }
 
 class MainErrorState extends NewsState {

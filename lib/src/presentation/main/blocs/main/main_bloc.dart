@@ -1,4 +1,4 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
@@ -41,9 +41,8 @@ class MainBloc extends Bloc<MainEvent, NewsState> {
 
     if (dataStateMain is DataSuccess) {
       newsList = dataStateMain.data!.news!;
-      emit(MainLoadedState(news: newsList,topNewsHeadlines: dataStateMain.data!.newsTopHeadlines));
+      emit(MainLoadedState(news: newsList));
       _firebaseService.initNotification();
-
     }
   }
 
@@ -58,10 +57,10 @@ class MainBloc extends Bloc<MainEvent, NewsState> {
     }
     if(dataStateMain.data!.news!.isEmpty) {
       isLastPage = true;
-      emit(MainLoadedState(news: newsList,topNewsHeadlines: dataStateMain.data!.newsTopHeadlines));
+      emit(MainLoadedState(news: newsList));
       return;
     }
     newsList.addAll(dataStateMain.data!.news!);
-    emit(MainLoadedState(news: newsList,topNewsHeadlines: dataStateMain.data!.newsTopHeadlines));
+    emit(MainLoadedState(news: newsList));
   }
 }

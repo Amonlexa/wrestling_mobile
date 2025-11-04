@@ -1,7 +1,7 @@
 import 'package:wrestling_hub/src/data/main/models/news.dart';
 import 'package:wrestling_hub/src/data/video/models/video.dart';
 import 'package:wrestling_hub/src/domain/main/usecases/get_favorite_news_usecase.dart';
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wrestling_hub/src/domain/video/usecases/get_favorite_videos_usecase.dart';
 
 part 'favorite_event.dart';

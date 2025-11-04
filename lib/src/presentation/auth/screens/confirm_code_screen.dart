@@ -2,7 +2,6 @@ import 'package:go_router/go_router.dart';
 import 'package:wrestling_hub/core/constants/app_colors.dart';
 import 'package:wrestling_hub/core/constants/app_strings.dart';
 import 'package:wrestling_hub/core/constants/app_urls.dart';
-import 'package:wrestling_hub/core/route/app_router.dart';
 import 'package:wrestling_hub/core/utils/wrestling_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,6 +11,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:wrestling_hub/src/presentation/auth/blocs/auth/auth_bloc.dart';
 import 'package:wrestling_hub/src/presentation/auth/blocs/auth/auth_event.dart';
 import 'package:wrestling_hub/src/presentation/auth/blocs/auth/auth_state.dart';
+import 'package:wrestling_hub/src/presentation/profile/blocs/profile/profile_bloc.dart';
 import 'package:wrestling_hub/src/presentation/shared/widgets/modal_bottom_feedback.dart';
 import 'package:wrestling_hub/src/presentation/shared/widgets/wrestling_button.dart';
 import 'package:wrestling_hub/src/presentation/shared/widgets/wrestling_progress_bar.dart';
@@ -38,6 +38,7 @@ class ConfirmOtpCode extends StatelessWidget {
               _controllerSms.clear();
            }
            if (state is AuthSuccessState) {
+             context.read<ProfileBloc>().add(ProfileGetLocalEvent());
              GoRouter.of(context).goNamed(from);
              WrestlingSnackBar().show(context, AppStrings.otpSuccessCode);
            }

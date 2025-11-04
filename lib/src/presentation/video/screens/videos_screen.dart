@@ -9,7 +9,6 @@ import 'package:wrestling_hub/src/presentation/shared/widgets/wrestling_progress
 import 'package:wrestling_hub/src/presentation/shared/widgets/wrestling_tab_bar.dart';
 import 'package:wrestling_hub/src/presentation/video/cubits/videos/videos_cubit.dart';
 import 'package:wrestling_hub/src/presentation/video/cubits/videos/videos_state.dart';
-import 'package:wrestling_hub/src/presentation/video/screens/video_test_screen.dart';
 
 class VideosScreen extends StatefulWidget {
 

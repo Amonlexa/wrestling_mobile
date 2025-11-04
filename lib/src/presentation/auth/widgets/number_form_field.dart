@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
 import 'package:wrestling_hub/core/constants/app_colors.dart';
-import 'package:wrestling_hub/core/constants/app_config.dart';
 import 'package:wrestling_hub/core/constants/app_text_styles.dart';
 
 

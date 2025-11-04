@@ -11,7 +11,6 @@ class MainModel extends MainEntity {
     super.timeZone,
     super.timeFormat,
     super.adsList,
-    super.newsTopHeadlines,
     super.news,
   });
 
@@ -22,9 +21,7 @@ class MainModel extends MainEntity {
       currentTime = parsed['current_time'] ?? '';
       timeZone = parsed['time_zone'] ?? '';
       timeFormat = parsed['time_format'] ?? '';
-      news = List<News>.from(parsed["news"].map((x) => News.fromJson(x))??{});
-      newsTopHeadlines = List<News>.from(parsed["top_headlines"].map((x) => News.fromJson(x))??{});
-
+      news = List<News>.from(parsed["last_news"].map((x) => News.fromJson(x))??{});
     }
 
   factory MainModel.fromEntity(MainEntity entity) {
@@ -35,7 +32,6 @@ class MainModel extends MainEntity {
       timeZone: entity.timeZone,
       timeFormat: entity.timeFormat,
       adsList: entity.adsList,
-      newsTopHeadlines: entity.newsTopHeadlines,
       news: entity.news,
     );
   }

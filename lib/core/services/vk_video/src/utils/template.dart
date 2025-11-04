@@ -25,7 +25,7 @@ class Template {
         <body>
           <iframe id="vkVideo"
                 width="100%" height="100%"
-                src="https://vk.com/video_ext.php?oid=%OID%&id=%ID%&hd=%hd%&autoplay=%AUTO_PLAY%&js_api=1&t=%T%&controls=0" 
+                src="https://vk.com/video_ext.php?oid=%OID%&id=%ID%&hd=%hd%&autoplay=%AUTO_PLAY%&js_api=1&t=%T%&controlbar=0" 
                 allow="autoplay" 
                 frameborder="0" allowfullscreen></iframe>
             <script>

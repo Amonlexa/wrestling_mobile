@@ -12,6 +12,7 @@ import 'package:wrestling_hub/src/presentation/auth/blocs/sign_in/sign_in_state.
 import 'package:wrestling_hub/src/presentation/auth/widgets/privacy_policy_text_widget.dart';
 import 'package:wrestling_hub/src/presentation/auth/widgets/sign_in_widget.dart';
 import 'package:wrestling_hub/src/presentation/auth/widgets/number_form_field.dart';
+import 'package:wrestling_hub/src/presentation/profile/blocs/profile/profile_bloc.dart';
 import 'package:wrestling_hub/src/presentation/shared/widgets/dissmissible_keyboard_widget.dart';
 import 'package:wrestling_hub/src/presentation/shared/widgets/wrestling_button.dart';
 
@@ -43,6 +44,7 @@ class _SignInScreen extends State<SignInScreen>{
           Fluttertoast.showToast(msg: state.message);
         }
         if(state is SignInGoogleLoggedState) {
+          context.read<ProfileBloc>().add(ProfileGetLocalEvent());
           GoRouter.of(context).goNamed(widget.from);
         }
       },
@@ -84,7 +86,7 @@ class _SignInScreen extends State<SignInScreen>{
                     ),
                     AppButton(
                       title: AppStrings.next,
-                      isEnabled: state is SignInFormState && state.isPhoneNumberValid ?? false,
+                      isEnabled: state is SignInFormState && state.isPhoneNumberValid,
                       onPressed: () {
                         GoRouter.of(context).pushNamed(
                           AppRoute.sms,

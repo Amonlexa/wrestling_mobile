@@ -85,7 +85,6 @@ class UserRepositoryImpl extends UserRepository {
 
   @override
   Future<DataStateAuth<User>> confirmSmsCode(Map<String, dynamic> data) async {
-    print(data);
     try {
       final httpResponse = await _remoteDataSource.confirmSmsCode(data);
       if (httpResponse.response.statusCode == HttpStatus.ok && jsonDecode(httpResponse.response.data)['user'] != null) {
@@ -145,10 +144,8 @@ class UserRepositoryImpl extends UserRepository {
       if (account == null) throw Exception("User canceled");
 
       final GoogleSignInAuthentication auth = await account.authentication;
-      print('idToken: ${auth.idToken}'); // <-- должен быть не null
       return DataSuccess(auth.idToken!);
     } catch (error) {
-      print("Error during sign-in: $error");
       return DataFailed(error.toString());
     }
   }

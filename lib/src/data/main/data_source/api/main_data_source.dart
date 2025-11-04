@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:wrestling_hub/core/constants/app_config.dart';
 import 'package:wrestling_hub/core/constants/app_urls.dart';
 import 'package:wrestling_hub/src/data/main/models/comment.dart';
 import 'package:dio/dio.dart' hide Headers;

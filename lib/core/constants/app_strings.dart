@@ -70,6 +70,7 @@ class AppStrings {
   //Главная
  static const String mainBestSelections = "Лучшие подборки";
  static const String mainFullNewsList = 'Полный список новостей';
+ static const String mainEvents = 'События';
  static const String mainMaxNewsLoaded = 'Загружено максимальное количество новостей';
 
  //Комментарии

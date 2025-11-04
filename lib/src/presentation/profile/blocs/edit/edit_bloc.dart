@@ -7,7 +7,7 @@ import 'package:wrestling_hub/src/domain/user/usecases/delete_user_usecase.dart'
 import 'package:wrestling_hub/src/domain/user/usecases/edit_user_usecase.dart';
 import 'package:wrestling_hub/src/domain/user/usecases/get_local_user_usecase.dart';
 import 'package:wrestling_hub/src/domain/user/usecases/send_image_server_usecase.dart';
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';

@@ -71,7 +71,6 @@ class MainRepositoryImpl extends MainRepository {
     try {
       final httpResponse = await _dataSource.getCommentNews(id);
       if (httpResponse.response.statusCode == HttpStatus.ok) {
-        print(httpResponse.data);
         return DataSuccess(httpResponse.data);
       } else {
         return DataFailed(customException(httpResponse));
@@ -87,7 +86,6 @@ class MainRepositoryImpl extends MainRepository {
     try {
       final httpResponse = await _dataSource.sendCommentNews(data);
       if (httpResponse.response.statusCode == HttpStatus.ok) {
-        print(httpResponse.data);
         return DataSuccess(httpResponse.data);
       } else {
         return DataFailed(customException(httpResponse));

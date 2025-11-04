@@ -1,4 +1,5 @@
 
+import 'package:wrestling_hub/src/data/main/models/events.dart';
 import 'package:wrestling_hub/src/data/main/models/news.dart';
 
 class MainEntity {
@@ -9,8 +10,8 @@ class MainEntity {
   String? timeZone;
   String? timeFormat;
   List<String>? adsList;
-  List<News>? newsTopHeadlines;
   List<News>? news;
+  List<Events>? events;
 
   MainEntity({
     this.auth,
@@ -19,7 +20,7 @@ class MainEntity {
     this.timeZone,
     this.timeFormat,
     this.adsList,
-    this.newsTopHeadlines,
     this.news,
+    this.events,
   });
 }

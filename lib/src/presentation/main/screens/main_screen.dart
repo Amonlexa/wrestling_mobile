@@ -3,8 +3,8 @@ import 'package:wrestling_hub/core/constants/app_strings.dart';
 import 'package:wrestling_hub/core/route/app_router.dart';
 import 'package:wrestling_hub/src/data/main/models/news.dart';
 import 'package:wrestling_hub/src/presentation/main/blocs/main/main_bloc.dart';
+import 'package:wrestling_hub/src/presentation/main/widgets/events_widget.dart';
 import 'package:wrestling_hub/src/presentation/main/widgets/wrestling_news_card.dart';
-import 'package:wrestling_hub/src/presentation/main/widgets/wrestling_news_top_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -102,28 +102,22 @@ class _MainScreenState extends State<MainScreen>  {
                       }
                       if(state is MainLoadedState) {
                         final news = state.news;
-                        final topNews = state.topNewsHeadlines;
                         return Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(AppStrings.mainBestSelections, style: Theme.of(context).textTheme.titleMedium,textAlign: TextAlign.center),
-                              const SizedBox(height: 10),
-                              SingleChildScrollView(
-                                child: SizedBox(
-                                  height: 340,
-                                  width: double.infinity,
-                                  child: ListView.builder(
-                                      shrinkWrap: true,
-                                      physics: const ScrollPhysics(),
-                                      itemCount: topNews!.length,
-                                      scrollDirection: Axis.horizontal,
-                                      padding: EdgeInsets.zero,
-                                      itemBuilder: (context, index) {
-                                        return WrestlingNewsTopCard(news: topNews[index]);
-                                      }
-                                  ),
+                              Text(AppStrings.mainEvents, style: Theme.of(context).textTheme.titleMedium,textAlign: TextAlign.center),
+                              SizedBox(
+                                height: 150,
+                                child: ListView.builder(
+                                    shrinkWrap: true,
+                                    itemCount: 5,
+                                    scrollDirection: Axis.horizontal,
+                                    padding: EdgeInsets.zero,
+                                    itemBuilder: (context, index) {
+                                      return const EventsWidget();
+                                    }
                                 ),
                               ),
                               const SizedBox(height: 10),
@@ -137,8 +131,7 @@ class _MainScreenState extends State<MainScreen>  {
                                   padding: EdgeInsets.zero,
                                   itemBuilder: (context, index) {
                                     if (index >= news.length) {
-                                      return Center(child: context.read<MainBloc>().isLastPage ? Text(AppStrings.mainMaxNewsLoaded, style: Theme.of(context).textTheme.titleMedium,textAlign: TextAlign.center,)
-                                          : const WrestlingProgressBar());
+                                      return Center(child: context.read<MainBloc>().isLastPage ? Text(AppStrings.mainMaxNewsLoaded, style: Theme.of(context).textTheme.titleMedium,textAlign: TextAlign.center) : const WrestlingProgressBar());
                                     } else {
                                       return WrestlingNewsCard(
                                         news: news[index],

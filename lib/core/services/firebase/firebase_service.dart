@@ -1,14 +1,15 @@
 import 'dart:io';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:wrestling_hub/core/resources/data_state.dart';
 import 'package:wrestling_hub/src/data/user/data_source/local/user_data.dart';
 import 'package:wrestling_hub/src/domain/user/usecases/edit_user_usecase.dart';
 class FirebaseService {
 
   final _firebaseMessaging = FirebaseMessaging.instance;
-  EditUserUseCase _userUpdateUseCase;
-  UserData _userData;
+  final EditUserUseCase _userUpdateUseCase;
+  final UserData _userData;
 
 
   FirebaseService(this._userUpdateUseCase,this._userData);
@@ -46,14 +47,14 @@ class FirebaseService {
       final dataState = await _userUpdateUseCase(params: data);
 
       if(dataState is DataFailed) {
-        print('Ошибка отправления токена');
+        debugPrint('Ошибка отправления токена');
       }
 
       if(dataState is DataSuccess) {
-        print('Токен отправлено');
+        debugPrint('Токен отправлено');
       }
     }else{
-      print('Не зарегестрирован');
+      debugPrint('Не зарегестрирован');
     }
 
 

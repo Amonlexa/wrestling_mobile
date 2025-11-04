@@ -1,6 +1,6 @@
 import 'package:wrestling_hub/src/domain/main/entities/comment_entity.dart';
 
-class Comment extends CommentEntity {
+class Comment extends CommentsEntity {
 
   Comment({
     super.id,

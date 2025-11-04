@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'constants/app_colors.dart';
 final appTheme = ThemeData(
   appBarTheme: const AppBarTheme(
-    color: AppColors.background,
+    backgroundColor: AppColors.background,
     iconTheme: IconThemeData(color: AppColors.white),
     actionsIconTheme: IconThemeData(color: AppColors.white)
   ),

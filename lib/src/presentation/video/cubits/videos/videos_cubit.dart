@@ -1,13 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:logger/logger.dart';
 import 'package:wrestling_hub/core/constants/app_strings.dart';
+import 'package:wrestling_hub/core/resources/data_state.dart';
 import 'package:wrestling_hub/src/domain/video/usecases/get_videos_usecase.dart';
 import 'package:wrestling_hub/src/presentation/video/cubits/videos/videos_state.dart';
 import 'package:wrestling_hub/src/presentation/video/widgets/videos_carousel.dart';
-
-import '../../../../../core/resources/data_state.dart';
 
 class VideosCubit extends Cubit<VideosState> {
   final Logger _logger;

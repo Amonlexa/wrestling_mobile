@@ -65,8 +65,6 @@ final sl = GetIt.instance;
 
 Future<void> initializeDependencies() async {
 
-
-
   //local data storages
   await Hive.initFlutter((await getApplicationDocumentsDirectory()).path);
   Hive.registerAdapter(NewsAdapter());

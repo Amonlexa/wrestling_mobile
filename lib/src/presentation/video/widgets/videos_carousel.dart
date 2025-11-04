@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:wrestling_hub/core/constants/app_strings.dart';
 import 'package:wrestling_hub/src/data/video/models/video.dart';

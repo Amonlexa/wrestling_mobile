@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:wrestling_hub/core/constants/app_colors.dart';
-import 'package:wrestling_hub/core/constants/app_config.dart';
 import 'package:wrestling_hub/src/presentation/shared/widgets/show_image.dart';
 
 

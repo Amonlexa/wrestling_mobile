@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:wrestling_hub/core/constants/app_colors.dart';
-import 'package:wrestling_hub/core/constants/app_config.dart';
 
 
 class WrestlingFormField extends StatelessWidget {

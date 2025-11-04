@@ -1,4 +1,4 @@
-class CommentEntity {
+class CommentsEntity {
 
   String? id;
   String? status;
@@ -9,7 +9,7 @@ class CommentEntity {
   String? firstName;
   String? avatars;
 
-  CommentEntity({
+  CommentsEntity({
     this.id,
     this.status,
     this.creationDateTime,

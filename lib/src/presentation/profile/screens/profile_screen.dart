@@ -1,4 +1,3 @@
-import 'package:wrestling_hub/core/constants/app_config.dart';
 import 'package:wrestling_hub/core/constants/app_strings.dart';
 import 'package:wrestling_hub/core/constants/app_urls.dart';
 import 'package:wrestling_hub/core/route/app_router.dart';
@@ -7,8 +6,6 @@ import 'package:wrestling_hub/src/presentation/shared/widgets/modal_bottom_feedb
 import 'package:wrestling_hub/src/presentation/shared/widgets/wrestling_button.dart';
 import 'package:wrestling_hub/src/presentation/shared/widgets/wrestling_info_alertdialog.dart';
 import 'package:wrestling_hub/src/presentation/shared/widgets/wrestling_simple_alertdialog.dart';
-import 'package:wrestling_hub/src/presentation/auth/blocs/auth/auth_bloc.dart';
-import 'package:wrestling_hub/src/presentation/auth/blocs/auth/auth_state.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,25 +18,24 @@ import 'package:wrestling_hub/src/presentation/profile/widgets/profile_widget.da
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+
   @override
   State<StatefulWidget> createState() => _ProfileScreen();
 }
 class _ProfileScreen extends State<ProfileScreen> {
 
+
+  @override
+  void initState() {
+    context.read<ProfileBloc>().add(ProfileGetLocalEvent());
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocBuilder<ProfileBloc, ProfileState>(
-        bloc: context.read<ProfileBloc>()..add(ProfileGetLocalEvent()),
         builder: (context, state) {
-          // Автоматический переход после авторизации
-          if (state is ProfileNoLoggedState) {
-            final authState = context.watch<AuthBloc>().state;
-            if (authState is AuthSuccessState) {
-              context.read<ProfileBloc>().add(ProfileGetLocalEvent());
-            }
-          }
-
           return SafeArea(
             child: Scaffold(
               appBar: AppBar(
@@ -99,12 +95,10 @@ class _ProfileScreen extends State<ProfileScreen> {
                           } else {
                             GoRouter.of(context).pushNamed(
                                 AppRoute.authName,
-                                pathParameters: {'from' : AppRoute.profile}
-                            ).then((val) {
-                              if (val == 'auth' && context.mounted) {
-                                context.read<ProfileBloc>().add(ProfileGetLocalEvent());
-                              }
-                            });
+                                pathParameters: {
+                                  'from' : AppRoute.profile
+                                }
+                            );
                           }
                         },
                       ),
@@ -174,7 +168,7 @@ class _ProfileScreen extends State<ProfileScreen> {
       title: 'Статусы',
       contentWidget: const Column(
         mainAxisSize: MainAxisSize.min,
-        children: const [
+        children:  [
           Row(children: [Icon(Icons.verified, color: Colors.blueGrey), Text('Не заполненный аккаунт')]),
           SizedBox(height: 5),
           Row(children: [Icon(Icons.verified, color: Colors.cyan), Text('Аккаунт заполнен')]),

@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:wrestling_hub/src/data/video/models/category_video.dart';
 
 abstract class VideosState {}
 
